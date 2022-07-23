@@ -1,0 +1,43 @@
+//////////////////////// SERVER A PAGE USING EXPRESS //////////////////////////////////
+
+const express= require("express")
+
+const app=express()
+
+app.get('/',(req,res)=>{
+  res.send('<h1>ANNIYAN 2.O</h1>')
+})
+
+
+app.listen(5001,()=>{
+    console.log("server listen on 5001")
+})
+
+
+
+//////////////////////////////// DB CONNECTION //////////////////////////////////////
+
+const mysql = require("mysql")
+
+const db=mysql.createConnection({
+  host:"localhost",
+  user:"root",
+  password:'',
+  database:"anniyan2o"
+})
+
+db.connect((error)=>{
+  if(error){
+    console.log(error)
+  }else{
+    console.log("Database connected")
+  }
+
+})
+
+const publicDirectory = path.join(__dirname,'./../public')
+
+
+app.use(express.static(publicDirectory))
+
+app.set('view engine','hbs')

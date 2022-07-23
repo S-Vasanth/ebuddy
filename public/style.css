@@ -1,0 +1,16 @@
+.navbar{
+    background-color: #563d7c;
+    color: #fff;
+    padding: 30px;
+
+}
+.navbar-nav{
+    
+    font-size: large;
+
+}
+
+.form{
+    border: 1px solid #ccc;
+  
+}
