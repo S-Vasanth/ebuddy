@@ -16,7 +16,7 @@ exports.nodal=(req,res)=>{
           console.log(error);
         } else {
           console.log(results);
-          return res.render("nodal", {
+          return res.render("index", {
             message: "complaint received",
           });
         }
