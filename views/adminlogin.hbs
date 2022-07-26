@@ -29,9 +29,9 @@
                     <li class="nav-item">
                         <a class="nav-link active " aria-current="page" href="/">COMPLAINT</a>
                     </li>
-                    <li class="nav-item">
+                    {{!-- <li class="nav-item">
                         <a class="nav-link active " href="/nodal">NODAL</a>
-                    </li>
+                    </li> --}}
 
                     <li class="nav-item dropdown">
                         <a class="nav-link active dropdown-toggle " href="/login" id="navbarDropdownMenuLink"
@@ -39,8 +39,9 @@
                             LOGIN
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item " href="/adminlogin">ADMIN LOGIN</a></li>
-                            <li><a class="dropdown-item " href="/studentlogin">STUDENT LOGIN</a></li>
+                            <li><a class="dropdown-item " href="/nodal">NODAL</a></li>
+                            <li><a class="dropdown-item " href="/thaluk">THALUK</a></li>
+                            <li><a class="dropdown-item " href="/bank">BANK</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -50,7 +51,7 @@
     <!--####################################### ADMINLOGIN FORM #################################################-->
     <div class="container mt-4 ">
         <div class="col-md-6 offset-md-3 form" style=" width: 30rem;">
-            <div class="card-header"> ADMIN LOGIN </div>
+            <div class="card-header"> NODAL </div>
             <div class="card-body">
 
                 <form action="/auth/adminlogin" method="POST">

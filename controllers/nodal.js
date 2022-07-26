@@ -26,3 +26,30 @@ exports.nodal=(req,res)=>{
    
  //  res.send("form submited")
 }
+
+
+exports.display_complaint=(req,res)=>{
+
+  
+  getdb.query(
+     "SELECT * from nodal",
+     (error, results) => {
+       if (error) {
+         console.log(error);
+       } else {
+         console.log(results);
+         let i = 1;
+          results.forEach((el) => {
+          el.s_no = `${i++}.`;
+          return el;
+          })
+         return res.send(results);
+      
+       }
+     }
+     
+   );
+   
+   
+}
+

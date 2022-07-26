@@ -41,3 +41,77 @@ const publicDirectory = path.join(__dirname,'./../public')
 app.use(express.static(publicDirectory))
 
 app.set('view engine','hbs')
+
+
+
+
+
+
+
+
+
+
+
+
+{{!-- $(document).ready(function () {
+    get_user();
+    });
+
+    var path = "/display/itemReturnFromEmployee";
+    var id, asset_code, sequence_no;
+
+    $(function () {
+    $("#itemDisplay").bootstrapTable({ search: true, data: [] });
+
+    get_user();
+    });
+    function get_user() {
+    $.ajax({
+    url: path,
+    type: "GET",
+    success: function (data, status) {
+    //console.log("test user="+JSON.stringify(data))
+    let json = data;
+    $("#itemDisplay").bootstrapTable("load", data);
+    },
+    });
+    } --}}
+
+
+
+
+
+
+
+
+      $(function () {
+             console.log("working")
+            $table.bootstrapTable({
+                url: path,
+                exportDataType: "all",
+                exportTypes: ['excel'],
+                pagination: true,
+                search: true,
+                columns: [
+                    { field: 's_no' },
+                    // { field: 'asset_type' },
+                    { field: 'address' },
+                    { field: 'city' },
+                    { field: 'district' },
+                    { field: 'pincode' },
+                    // { field: 'invoice_receipt' },
+                    { field: 'document' },
+                ]
+            })
+        }) 
+
+
+
+
+
+
+
+
+
+
+
