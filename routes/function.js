@@ -24,4 +24,7 @@ router.post('/bankreg',bankController.bankreg)
 router.post('/banklogin',bankController.banklogin)
 
 
+router.post('/bank',bankController.bank)
+
+
 module.exports=router

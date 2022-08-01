@@ -2,6 +2,29 @@ const db = require('../db')
 
 const getdb=db.getConnection()
 
+exports.bank=(req,res)=>{
+  console.log(req.body)
+  const {name,Fname,dob,age,gender,address,district}=req.body
+
+  
+  getdb.query(
+     "INSERT INTO bank SET ?",
+     { name: name, Fname: Fname, dob: dob,age:age, gender: gender, address: address, district: district },
+     (error, results) => {
+       if (error) {
+         console.log(error);
+       } else {
+         console.log(results);
+         return res.render("index", {
+           message: "data sent sucessfully",
+         });
+       }
+     }
+   );
+ 
+   
+ //  res.send("form submited")
+}
 
 exports.bankreg=(req,res)=>{
    console.log(req.body)
