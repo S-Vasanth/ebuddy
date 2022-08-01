@@ -31,9 +31,9 @@
                     <li class="nav-item">
                         <a class="nav-link active " aria-current="page" href="/">COMPLAINT</a>
                     </li>
-                    <li class="nav-item">
+                    {{!-- <li class="nav-item">
                         <a class="nav-link active " href="/nodal">NODAL</a>
-                    </li>
+                    </li> --}}
 
                     <li class="nav-item dropdown">
                         <a class="nav-link active dropdown-toggle " href="/login" id="navbarDropdownMenuLink"
@@ -41,8 +41,9 @@
                             LOGIN
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item " href="/adminlogin">ADMIN LOGIN</a></li>
-                            <li><a class="dropdown-item " href="/studentlogin">STUDENT LOGIN</a></li>
+                            <li><a class="dropdown-item " href="/nodalui">NODAL</a></li>
+                            <li><a class="dropdown-item " href="/thalukui">THALUK</a></li>
+                            <li><a class="dropdown-item " href="/bankui">BANK</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -71,8 +72,13 @@
                     <th data-field="district">DISTRICT</th>
                     <th data-field="pincode">PINCODE</th>
                     <th data-field="verify">VERFIED</th>
-                    <th data-field="aadhar">GET AADHAR</th>
-                    <th data-field="account">GET BANK</th>
+
+                    <th data-field="document" data-formatter="operateFormatter" class="text-center"
+                        data-events="operateEvents" data-sortable="true">
+                        GET INFO</th>
+                    {{!-- <th data-field="document1" data-formatter="operateFormatter1" class="text-center"
+                        data-events="operateEvents" data-sortable="true">
+                        BANK</th> --}}
 
                 </tr>
             </thead>
@@ -89,6 +95,8 @@
 
 
     <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.16.0/bootstrap-table.min.js"></script>
@@ -129,10 +137,40 @@
 
 
     <script>
+        function operateFormatter(value, row, index) {
+
+            return [
+
+                '<button class="btn btn-sm btn-primary getinfo" href="javascript:void(0)" title="Edit item">',
+                '<i style="color:White" ></i>GET INFO</button>',
+
+
+            ].join('')
+
+        }
+
+
+        window.operateEvents = {
+            /* BUTTON EDIT EVENT */
+            'click .getinfo': function (e, value, row, index) {
+                var nodal_id = row['nodal_id'];
+                console.log(nodal_id)
+                var data = JSON.stringify(row);
+                console.log("check document=" + data);
+                window.location.href = `/getinfo?nodal_id=${nodal_id}`
+
+            }
+
+        }
+
+
+
+
+
         /*##################### LOAD DATA IN BOOTSTRAP TABLE ##########################*/
         var $table = $('#nodal_table');
 
-        var path = '/function/complaint';
+        // var path = '/function/complaint';
 
 
         $(document).ready(function () {
@@ -140,7 +178,6 @@
         });
 
         var path = "/auth/complaint";
-        // var id, asset_code, sequence_no;
 
         $(function () {
             $("#nodal_table").bootstrapTable({ search: true, data: [] });

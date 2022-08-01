@@ -115,3 +115,94 @@ app.set('view engine','hbs')
 
 
 
+
+
+
+
+
+
+
+
+
+     function operateFormatter(value, row, index) {
+
+            return [
+
+                '<button class="btn btn-sm btn-primary aadhar" href="javascript:void(0)" title="Edit item">',
+                '<i style="color:White" ></i>GET INFO</button>',
+
+
+            ].join('')
+
+        }
+        function operateFormatter1(value, row, index) {
+            console.log(value)
+
+            return [
+
+                '<button class="btn btn-sm btn-primary bank" href="javascript:void(0)" title="Edit item">',
+                '<i style="color:White" ></i>GET BANK</button>',
+
+
+            ].join('')
+
+        }
+
+
+        window.operateEvents = {
+            /* BUTTON EDIT EVENT */
+            'click .aadhar': function (e, value, row, index) {
+                var data = JSON.stringify(row);
+                console.log("check document=" + data);
+                //  window.location.href = `/insert/assetDetails?asset_id=${asset_id}`
+
+            },
+            'click .bank': function (e, value, row, index) {
+                var data1 = JSON.stringify(row);
+                console.log("check document=" + data1);
+                //  window.location.href = `/insert/assetDetails?asset_id=${asset_id}`
+
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+         <!--####################################### ADMINLOGIN FORM #################################################-->
+    <div class="container mt-4 ">
+        <div class="col-md-6 offset-md-3 form" style=" width: 30rem;">
+            <div class="card-header"> NODAL </div>
+            <div class="card-body">
+
+                <form action="/auth/adminlogin" method="POST">
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" name="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" name="password">
+                    </div>
+
+                    <br>
+                    <button type="submit" class="btn btn-primary">Admin login</button>
+                </form>
+            </div>
+
+
+        </div>
+    </div>
+

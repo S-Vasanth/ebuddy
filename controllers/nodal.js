@@ -53,3 +53,53 @@ exports.display_complaint=(req,res)=>{
    
 }
 
+exports.nodalreg=(req,res)=>{
+  console.log(req.body)
+  const {district,email,password}=req.body
+
+  
+  getdb.query(
+     "INSERT INTO nodalreg SET ?",
+     { district:district,email:email,password:password},
+     (error, results) => {
+       if (error) {
+         console.log(error);
+       } else {
+         console.log(results);
+         return res.render("index", {
+           message: "complaint received",
+         });
+       }
+     }
+   );
+ 
+  
+//  res.send("form submited")
+}
+
+
+exports.nodallogin=(req,res)=>{
+  console.log(req.body)
+  const {district,email,password}=req.body
+
+  
+  getdb.query(
+    "SELECT * FROM nodalreg WHERE email=?", [email],
+     (error, results) => {
+       if (error) {
+         console.log(error);
+       } else {
+         console.log(results);
+         let pass = results[0].password;
+         if(password==pass){
+          return res.render("nodal");
+
+         }
+        
+       }
+     }
+   );
+ 
+  
+//  res.send("form submited")
+}
