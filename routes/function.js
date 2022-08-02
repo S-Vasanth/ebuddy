@@ -15,6 +15,9 @@ router.post('/nodal',nodalController.nodal)
 
 router.get('/complaint',nodalController.display_complaint)
 
+
+router.get('/complaint1',bankController.display_complaint1)
+
 router.post('/nodalreg',nodalController.nodalreg)
 
 router.post('/nodallogin',nodalController.nodallogin)

@@ -4,18 +4,18 @@ const getdb=db.getConnection()
 
 exports.bank=(req,res)=>{
   console.log(req.body)
-  const {name,Fname,dob,age,gender,address,district}=req.body
+  const {comp_id,name,Fname,dob,age,gender,address,district}=req.body
 
   
   getdb.query(
      "INSERT INTO bank SET ?",
-     { name: name, Fname: Fname, dob: dob,age:age, gender: gender, address: address, district: district },
+     { comp_id:comp_id,name: name, Fname: Fname, dob: dob,age:age, gender: gender, address: address, district: district },
      (error, results) => {
        if (error) {
          console.log(error);
        } else {
          console.log(results);
-         return res.render("index", {
+         return res.render("getinfo", {
            message: "data sent sucessfully",
          });
        }
@@ -74,4 +74,30 @@ exports.banklogin=(req,res)=>{
    
     
   //  res.send("form submited")
+  }
+
+
+  exports.display_complaint1=(req,res)=>{
+
+  
+    getdb.query(
+       "SELECT * from bank",
+       (error, results) => {
+         if (error) {
+           console.log(error);
+         } else {
+           console.log(results);
+           let i = 1;
+            results.forEach((el) => {
+            el.s_no = `${i++}.`;
+            return el;
+            })
+           return res.send(results);
+        
+         }
+       }
+       
+     );
+     
+     
   }

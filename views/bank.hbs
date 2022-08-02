@@ -51,6 +51,145 @@
     <!--####################################### ADMINLOGIN FORM #################################################-->
 
 
+    <div class="col-md-8">
+
+        <table id="bank_table" class="table table-bordered" data-pagination="true" data-sort-name="id">
+            <thead>
+                <tr>
+                    <th data-field="s_no">S.No.</th>
+                    <!-- <th data-field="asset_type">Asset Type</th> -->
+                    <th data-field="name">NAME</th>
+                    <th data-field="Fname">GUARDIAN NAME</th>
+                    <th data-field="dob">DOB</th>
+                    <th data-field="age">AGE</th>
+                    <th data-field="address">ADDRESS</th>
+                    <th data-field="district">DISTRICT</th>
+                    <th data-field="aadhar">AADHAR NO</th>
+
+                    {{!-- <th data-field="document" data-formatter="operateFormatter" class="text-center"
+                        data-events="operateEvents" data-sortable="true">
+                        GET DETAIL</th>
+                    <th data-field="document1" data-formatter="operateFormatter1" class="text-center"
+                        data-events="operateEvents" data-sortable="true">
+                        BANK</th> --}}
+
+                </tr>
+            </thead>
+
+        </table>
+
+    </div>
+
+
+    </div>
+
+
+    <!-- ################################### BOOTSTRAP TABLE #########################################-->
+
+
+    <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.16.0/bootstrap-table.min.js"></script>
+
+    <!-- Latest compiled and minified Bootstrap JavaScript -->
+    {{!--
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script> --}}
+
+    {{!--
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.6.2/core.min.js"></script> --}}
+
+
+
+
+
+    {{!--
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    --}}
+
+
+    {{!--
+    <script src='http://code.jquery.com/jquery-3.1.0.min.js'></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> --}}
+
+    {{!--
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> --}}
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+        function operateFormatter(value, row, index) {
+
+            return [
+
+                '<button class="btn btn-sm btn-primary getinfo" href="javascript:void(0)" title="Edit item">',
+                '<i style="color:White" ></i>GET INFO</button>',
+
+
+            ].join('')
+
+        }
+
+
+        window.operateEvents = {
+            /* BUTTON EDIT EVENT */
+            'click .getinfo': function (e, value, row, index) {
+                var sno = row['sno'];
+                console.log(sno)
+                var data = JSON.stringify(row);
+                console.log("check document=" + data);
+                window.location.href = `/getinfo?sno=${sno}`
+
+            }
+            //
+        }
+
+
+
+
+
+        /*##################### LOAD DATA IN BOOTSTRAP TABLE ##########################*/
+        var $table = $('#bank_table');
+
+        // var path = '/function/complaint';
+
+
+        $(document).ready(function () {
+            get_user();
+        });
+
+        var path = "/auth/complaint1";
+
+        $(function () {
+            $("#bank_table").bootstrapTable({ search: true, data: [] });
+
+            get_user();
+        });
+        function get_user() {
+            $.ajax({
+                url: path,
+                type: "GET",
+                success: function (data, status) {
+                    console.log("complaint1=" + JSON.stringify(data))
+                    let json = data;
+                    $("#bank_table").bootstrapTable("load", data);
+                },
+            });
+        }
+    </script>
+
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"

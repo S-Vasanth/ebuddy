@@ -68,6 +68,11 @@
 
                     <form class="row g-3" action="/auth/bank" method="POST">
                         <div class="col-md-12">
+                            <label for="comp_id">comp_id</label>
+                            <input type="text" class="form-control" id="comp_id" name="comp_id">
+
+                        </div>
+                        <div class="col-md-12">
                             <label for="name">Name</label>
                             <input type="text" class="form-control" id="name" name="name">
 
@@ -150,6 +155,15 @@
     {{/if}}
 
     </div>
+
+    <script>
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const comp_id = urlParams.get('comp_id')
+        console.log(comp_id);
+        document.getElementById('comp_id').value = comp_id;
+
+    </script>
 
 
     <!-- JavaScript Bundle with Popper -->

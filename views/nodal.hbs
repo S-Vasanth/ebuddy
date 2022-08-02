@@ -145,6 +145,7 @@
                 '<i style="color:White" ></i>GET INFO</button>',
 
 
+
             ].join('')
 
         }
@@ -153,11 +154,11 @@
         window.operateEvents = {
             /* BUTTON EDIT EVENT */
             'click .getinfo': function (e, value, row, index) {
-                var nodal_id = row['nodal_id'];
-                console.log(nodal_id)
+                var comp_id = row['comp_id'];
+                console.log(comp_id)
                 var data = JSON.stringify(row);
                 console.log("check document=" + data);
-                window.location.href = `/getinfo?nodal_id=${nodal_id}`
+                window.location.href = `/getinfo?comp_id=${comp_id}`
 
             }
 
