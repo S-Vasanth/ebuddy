@@ -40,7 +40,7 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <li><a class="dropdown-item " href="/nodalui">NODAL</a></li>
-                            <li><a class="dropdown-item " href="/thalukui">THALUK</a></li>
+                            <li><a class="dropdown-item " href="/aadharui">E-AADHAR</a></li>
                             <li><a class="dropdown-item " href="/bankui">BANK</a></li>
                         </ul>
                     </li>
@@ -50,11 +50,37 @@
     </nav>
     <!--####################################### ADMINLOGIN FORM #################################################-->
     <div class="container mt-4 ">
+        <div class="col-md-6 offset-md-3 form" style=" width: 30rem;">
+            <div class="card-header"> NODAL </div>
+            <div class="card-body">
 
-        <a href="/nodalreg"><button type="submit" class="btn btn-primary">Nodal Register</button></a>
-        <br>
-        <br>
-        <a href="/nodallogin"><button type="submit" class="btn btn-primary">Nodal login</button></a>
+                <form action="/auth/nodalreg" method="POST">
+
+                    <div class="form-group">
+                        <label for="district">District</label>
+                        <input type="text" class="form-control" id="district" name="district">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" name="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" name="password">
+                    </div>
+
+                    <br>
+                    <button type="submit" class="btn btn-primary">NODAL REGISTER</button>
+                </form>
+            </div>
+            <br>
+            <p>Already have an account?<a href="/nodallogin">Login</a></p>
+
+        </div>
+
+
+
 
 
     </div>

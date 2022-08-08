@@ -103,3 +103,221 @@ exports.nodallogin=(req,res)=>{
   
 //  res.send("form submited")
 }
+exports.nodalstatus=(req,res)=>{
+  console.log(req.body.comp_id)
+   var comp_id=req.body.comp_id
+    // console.log(obj.comp_id)
+    // var reqData =  JSON.stringify(req.body);
+    // var comp_id=JSON.parse(reqData)
+   
+    // console.log("string :::: " + reqData);
+    // console.log("parse:::: " + comp_id.comp_id);
+ 
+  getdb.query(
+     "UPDATE nodal SET bank_status=? WHERE comp_id=?",["ACCEPTED",comp_id],
+     (error, results) => {
+       if (error) {
+         console.log(error);
+       } else {
+         console.log(results);
+         return res.render("bank", {
+           message: "Status updated",
+         });
+       }
+     }
+   );
+ 
+  
+//  res.send("form submited")
+}
+
+exports.nodalstatus=(req,res)=>{
+  console.log(req.body.comp_id)
+   var comp_id=req.body.comp_id
+    // console.log(obj.comp_id)
+    // var reqData =  JSON.stringify(req.body);
+    // var comp_id=JSON.parse(reqData)
+   
+    // console.log("string :::: " + reqData);
+    // console.log("parse:::: " + comp_id.comp_id);
+ 
+  getdb.query(
+     "UPDATE nodal SET bank_status=? WHERE comp_id=?",["ACCEPTED",comp_id],
+     (error, results) => {
+       if (error) {
+         console.log(error);
+       } else {
+         console.log(results);
+         return res.render("bank", {
+           message: "Status updated",
+         });
+       }
+     }
+   );
+ 
+  
+//  res.send("form submited")
+}
+
+exports.nodalstatus1=(req,res)=>{
+  console.log(req.body.comp_id)
+   var comp_id=req.body.comp_id
+    // console.log(obj.comp_id)
+    // var reqData =  JSON.stringify(req.body);
+    // var comp_id=JSON.parse(reqData)
+   
+    // console.log("string :::: " + reqData);
+    // console.log("parse:::: " + comp_id.comp_id);
+ 
+  getdb.query(
+     "UPDATE nodal SET bank_status=? WHERE comp_id=?",["IN PROCESS",comp_id],
+     (error, results) => {
+       if (error) {
+         console.log(error);
+       } else {
+         console.log(results);
+         return res.render("bank", {
+           message: "Status updated",
+         });
+       }
+     }
+   );
+ 
+  
+//  res.send("form submited")
+}
+
+exports.nodalstatus2=(req,res)=>{
+  console.log(req.body.comp_id)
+   var comp_id=req.body.comp_id
+    // console.log(obj.comp_id)
+    // var reqData =  JSON.stringify(req.body);
+    // var comp_id=JSON.parse(reqData)
+   
+    // console.log("string :::: " + reqData);
+    // console.log("parse:::: " + comp_id.comp_id);
+ 
+  getdb.query(
+     "UPDATE nodal SET bank_status=? WHERE comp_id=?",["Process Completed",comp_id],
+     (error, results) => {
+       if (error) {
+         console.log(error);
+       } else {
+         console.log(results);
+         return res.render("bank", {
+           message: "Status updated",
+         });
+       }
+     }
+   );
+ 
+  
+//  res.send("form submited")
+}
+
+exports.aadharaccept=(req,res)=>{
+  console.log(req.body.comp_id)
+   var comp_id=req.body.comp_id
+    // console.log(obj.comp_id)
+    // var reqData =  JSON.stringify(req.body);
+    // var comp_id=JSON.parse(reqData)
+   
+    // console.log("string :::: " + reqData);
+    // console.log("parse:::: " + comp_id.comp_id);
+ 
+  getdb.query(
+     "UPDATE nodal SET aadhar_status=? WHERE comp_id=?",["ACCEPTED",comp_id],
+     (error, results) => {
+       if (error) {
+         console.log(error);
+       } else {
+         console.log(results);
+         return res.render("aadhar", {
+           message: "Status updated",
+         });
+       }
+     }
+   );
+ 
+  
+//  res.send("form submited")
+}
+
+
+exports.aadharprocess=(req,res)=>{
+  console.log(req.body.comp_id)
+   var comp_id=req.body.comp_id
+    // console.log(obj.comp_id)
+    // var reqData =  JSON.stringify(req.body);
+    // var comp_id=JSON.parse(reqData)
+   
+    // console.log("string :::: " + reqData);
+    // console.log("parse:::: " + comp_id.comp_id);
+ 
+  getdb.query(
+     "UPDATE nodal SET aadhar_status=? WHERE comp_id=?",["IN PROCESS",comp_id],
+     (error, results) => {
+       if (error) {
+         console.log(error);
+       } else {
+         console.log(results);
+         return res.render("aadhar", {
+           message: "Status updated",
+         });
+       }
+     }
+   );
+ 
+  
+//  res.send("form submited")
+}
+exports.aadharcompleted=(req,res)=>{
+  console.log(req.body.comp_id)
+   var comp_id=req.body.comp_id
+    // console.log(obj.comp_id)
+    // var reqData =  JSON.stringify(req.body);
+    // var comp_id=JSON.parse(reqData)
+   
+    // console.log("string :::: " + reqData);
+    // console.log("parse:::: " + comp_id.comp_id);
+ 
+  getdb.query(
+     "UPDATE nodal SET aadhar_status=? WHERE comp_id=?",["COMPLETED",comp_id],
+     (error, results) => {
+       if (error) {
+         console.log(error);
+       } else {
+         console.log(results);
+         return res.render("aadhar", {
+           message: "Status updated",
+         });
+       }
+     }
+   );
+ 
+  
+//  res.send("form submited")
+}
+
+exports.aadharhide=(req,res)=>{
+  console.log(req.body.comp_id)
+   var comp_id=req.body.comp_id
+   
+  getdb.query(
+     "SELECT * FROM aadhar  WHERE comp_id=?",[comp_id],
+     (error, results) => {
+       if (error) {
+         console.log(error);
+       } else {
+         console.log(results);
+         res.send(results);
+        //  return res.render("aadhar", {
+        //    message: "Status updated",
+       //  });
+       }
+     }
+   );
+ 
+  
+//  res.send("form submited")
+}

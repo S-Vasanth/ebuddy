@@ -46,6 +46,23 @@ router.get('/studentlogin',(req,res)=>{
   res.render('getinfo')
  })
 
+ router.get('/aadharlogin',(req,res)=>{
+    res.render('aadharlogin')
+   })
+
+   router.get('/aadharreg',(req,res)=>{
+    res.render('aadharreg')
+   })
+
+
+   router.get('/aadharui',(req,res)=>{
+    res.render('aadharui')
+   })
+
+   router.get('/aadhar',(req,res)=>{
+    res.render('aadhar')
+   })
+
 
   
 module.exports = router;

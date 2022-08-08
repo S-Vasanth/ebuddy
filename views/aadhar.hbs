@@ -53,7 +53,7 @@
 
     <div class="col-md-8">
 
-        <table id="bank_table" class="table table-bordered" data-pagination="true" data-sort-name="id">
+        <table id="aadhar_table" class="table table-bordered" data-pagination="true" data-sort-name="id">
             <thead>
                 <tr>
                     <th data-field="s_no">S.No.</th>
@@ -64,7 +64,6 @@
                     <th data-field="age">AGE</th>
                     <th data-field="address">ADDRESS</th>
                     <th data-field="district">DISTRICT</th>
-                    <th data-field="aadhar">AADHAR NO</th>
                     <th data-field="sts" data-formatter="operateFormatter" class="text-center"
                         data-events="operateEvents" data-sortable="true">
                         STATUS</th>
@@ -126,21 +125,27 @@
 
 
 
+
+
+
+
+
+
+
     <script>
         function operateFormatter(value, row, index) {
 
             return [
 
-                '<button class="btn btn-sm btn-danger like" href="javascript:void(0)" title="Accept">',
+                '<button class="btn btn-sm btn-danger aAccepted" href="javascript:void(0)" title="Accept">',
                 '<i style="color:White" class="fa fa-hand-paper-o"></i></button>',
                 '</a> ',
-                '<button class="btn btn-sm btn-primary process" data-toggle="modal" href="javascript:void(0)" title="Progress">',
+                '<button class="btn btn-sm btn-primary aProcess" href="javascript:void(0)" title="Progress">',
                 '<i style="color:White;" class="fa fa-spinner"></i></button>&nbsp',
                 '</a>',
-                '<button class="btn btn-sm btn-success completed" data-toggle="modal" href="javascript:void(0)" title="Completed">',
+                '<button class="btn btn-sm btn-success aCompleted" href="javascript:void(0)" title="Completed">',
                 '<i style="color:White;" class="fa fa-check"></i></button>&nbsp',
                 '</a>'
-
 
 
             ].join('')
@@ -150,33 +155,13 @@
 
         window.operateEvents = {
             /* BUTTON EDIT EVENT */
-            'click .like': function (e, value, row, index) {
+            'click .aAccepted': function (e, value, row, index) {
                 var comp_id = row['comp_id'];
 
                 //var comp_id = row['comp_id'];
-                console.log(comp_id)
-                //   console.log("check document=" + data);
-                var path = `/auth/nodalstatus`
-
-                $.ajax({
-                    url: path,
-                    data: { comp_id: comp_id },
-                    type: "POST",
-                    success: function (data, status) {
-
-                    },
-                });
-
-            },
-
-
-            'click .process': function (e, value, row, index) {
-                var comp_id = row['comp_id'];
-
-                console.log(comp_id)
 
                 //   console.log("check document=" + data);
-                var path = `/auth/nodalstatus1`
+                var path = `/auth/aadharaccept`
 
                 $.ajax({
                     url: path,
@@ -191,13 +176,36 @@
 
 
 
-            'click .completed': function (e, value, row, index) {
+
+            /* BUTTON EDIT EVENT */
+            'click .aProcess': function (e, value, row, index) {
                 var comp_id = row['comp_id'];
-                console.log(comp_id)
+
                 //var comp_id = row['comp_id'];
 
                 //   console.log("check document=" + data);
-                var path = `/auth/nodalstatus2`
+                var path = `/auth/aadharprocess`
+
+                $.ajax({
+                    url: path,
+                    data: { comp_id: comp_id },
+                    type: "POST",
+                    success: function (data, status) {
+
+                    },
+                });
+
+            },
+
+            /* BUTTON EDIT EVENT */
+            'click .aCompleted': function (e, value, row, index) {
+                var comp_id = row['comp_id'];
+
+                var comp_id = row['comp_id'];
+                console.log("check document=" + comp_id);
+
+                //console.log("check document=" + data);
+                var path = `/auth/aadharcompleted`
 
                 $.ajax({
                     url: path,
@@ -210,16 +218,10 @@
 
             }
 
+
         }
-
-
-
-
-
-
-
         /*##################### LOAD DATA IN BOOTSTRAP TABLE ##########################*/
-        var $table = $('#bank_table');
+        var $table = $('#aadhar_table');
 
         // var path = '/function/complaint';
 
@@ -228,10 +230,10 @@
             get_user();
         });
 
-        var path = "/auth/complaint1";
+        var path = "/auth/aadhar_display";
 
         $(function () {
-            $("#bank_table").bootstrapTable({ search: true, data: [] });
+            $("#aadhar_table").bootstrapTable({ search: true, data: [] });
 
             get_user();
         });
@@ -240,9 +242,9 @@
                 url: path,
                 type: "GET",
                 success: function (data, status) {
-                    console.log("complaint1=" + JSON.stringify(data))
+                    console.log("complaint1" + JSON.stringify(data))
                     let json = data;
-                    $("#bank_table").bootstrapTable("load", data);
+                    $("#aadhar_table").bootstrapTable("load", data);
                 },
             });
         }

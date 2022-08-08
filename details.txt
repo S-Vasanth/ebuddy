@@ -206,3 +206,11 @@ app.set('view engine','hbs')
         </div>
     </div>
 
+
+
+   '<button class="btn btn-sm btn-primary process" data-toggle="modal" href="javascript:void(0)" title="Progress">',
+                '<i style="color:White;" class="fa fa-spinner"></i></button>&nbsp',
+                '</a>',
+                '<button class="btn btn-sm btn-success completed" data-toggle="modal" href="javascript:void(0)" title="Completed">',
+                '<i style="color:White;" class="fa fa-check"></i></button>&nbsp',
+                '</a>',
