@@ -63,6 +63,18 @@ router.get('/studentlogin',(req,res)=>{
     res.render('aadhar')
    })
 
+   
+   router.get('/nclb',(req,res)=>{
+    res.render('nclb')
+   })
 
+   router.get('/nclblogin',(req,res)=>{
+    res.render('nclblogin')
+   })
+  
+   
+   router.get('/nclbreg',(req,res)=>{
+    res.render('nclbreg')
+   })
   
 module.exports = router;

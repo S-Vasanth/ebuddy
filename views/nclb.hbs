@@ -62,22 +62,22 @@
 
     <div class="col-md-8">
 
-        <table id="nodal_table" class="table table-bordered" data-pagination="true" data-sort-name="id">
+        <table id="nclb_table" class="table table-bordered" data-pagination="true" data-sort-name="id">
             <thead>
                 <tr>
                     <th data-field="s_no">S.No.</th>
                     <!-- <th data-field="asset_type">Asset Type</th> -->
-                    <th data-field="address">ADDRESS</th>
-                    <th data-field="city">CITY</th>
-                    <th data-field="district">DISTRICT</th>
-                    <th data-field="pincode">PINCODE</th>
-                    <th data-field="verify">VERFIED</th>
+                    <th data-field="name">NAME</th>
+                    <th data-field="Fname">Fname</th>
+                    <th data-field="dob">DOB</th>
+                    {{!-- <th data-field="pincode">PINCODE</th>
+                    <th data-field="verify">VERFIED</th> --}}
 
                     <th data-field="document" data-formatter="operateFormatter" class="text-center"
                         data-events="operateEvents" data-sortable="true">
-                        GET INFO</th>
-                    <th data-field="bank_status">BANK STATUS</th>
-                    <th data-field="aadhar_status">AADHAR STATUS</th>
+                        SHOW INFO</th>
+                    {{!-- <th data-field="bank_status">BANK STATUS</th>
+                    <th data-field="aadhar_status">AADHAR STATUS</th> --}}
                     {{!-- <th data-field="document1" data-formatter="operateFormatter1" class="text-center"
                         data-events="operateEvents" data-sortable="true">
                         BANK</th> --}}
@@ -143,8 +143,8 @@
 
             return [
 
-                '<button class="btn btn-sm btn-primary getinfo" href="javascript:void(0)" title="Edit item">',
-                '<i style="color:White" ></i>GET INFO</button>',
+                '<button class="btn btn-sm btn-primary showinfo"  data-toggle="modal" data-target="#exampleModal" title="Edit item">',
+                '<i style="color:White" ></i>SHOW INFO</button>',
 
 
 
@@ -155,23 +155,62 @@
 
         window.operateEvents = {
             /* BUTTON EDIT EVENT */
-            'click .getinfo': function (e, value, row, index) {
-                var comp_id = row['comp_id'];
-                console.log(comp_id)
-                var data = JSON.stringify(row);
-                console.log("check document=" + data);
-                window.location.href = `/getinfo?comp_id=${comp_id}`
+
+
+            'click .showinfo': function (e, value, row, index) {
+
+                var name = row['Fname'];
+
+                console.log(row);
+                //  console.log("value of doc:--->" + value)
+
+
+
+                `<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body"  style="text-align: center;"> 
+                          <div class="form-group row">
+                              <h3>${name}</h3>   
+                              <div class="col-sm-6">
+
+                              </div>
+                          </div>
+
+
+                          <div class="form-group row">
+                              <h3>${name}</h3>  
+                              <div class="col-sm-6">
+                            
+                              </div>
+                          </div>
+
+
+
+                     </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+              </div>
+            </div>
+          </div>
+        </div>`
+
 
             }
+
 
         }
 
 
-
-
-
         /*##################### LOAD DATA IN BOOTSTRAP TABLE ##########################*/
-        var $table = $('#nodal_table');
+        var $table = $('#nclb_table');
 
         // var path = '/function/complaint';
 
@@ -180,10 +219,10 @@
             get_user();
         });
 
-        var path = "/auth/complaint";
+        var path = "/auth/showdetailsfor_nclb";
 
         $(function () {
-            $("#nodal_table").bootstrapTable({ search: true, data: [] });
+            $("#nclb_table").bootstrapTable({ search: true, data: [] });
 
             get_user();
         });
@@ -194,7 +233,7 @@
                 success: function (data, status) {
                     console.log("complaint=" + JSON.stringify(data))
                     let json = data;
-                    $("#nodal_table").bootstrapTable("load", data);
+                    $("#nclb_table").bootstrapTable("load", data);
                 },
             });
         }

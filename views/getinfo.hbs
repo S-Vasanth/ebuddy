@@ -41,7 +41,7 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <li><a class="dropdown-item " href="/nodalui">NODAL</a></li>
-                            <li><a class="dropdown-item " href="/thalukui">THALUK</a></li>
+                            <li><a class="dropdown-item " href="/aadharui">E-AADHAR</a></li>
                             <li><a class="dropdown-item " href="/bankui">BANK</a></li>
                         </ul>
                     </li>
@@ -120,7 +120,12 @@
                         <br>
                         <div class="col-md-5"></div>
                         <div class="col-md-6">
-                            <button type="submit" class="btn btn-primary">get Aadhar</button>
+                            <a href="http://localhost:5001/getinfo?comp_id=15">
+                                <button type="submit" class="btn btn-primary">get
+                                    Aadhar</button>
+                            </a>
+
+                            n>
                         </div>
                     </form>
                 </div>
@@ -130,86 +135,6 @@
         </div>
 
     </div>
-
-
-    <script>
-
-
-        const queryString = window.location.search;
-        const urlParams = new URLSearchParams(queryString);
-        const comp_id = urlParams.get('comp_id')
-        console.log(comp_id);
-        document.getElementById('comp_id').value = comp_id;
-        //  document.getElementById('comp_id1').value = comp_id;
-
-
-
-        hideaadhar()
-
-        function hideaadhar() {
-            var path = `/auth/aadharhide`
-
-            $.ajax({
-                url: path,
-                data: { comp_id: comp_id },
-                type: "POST",
-                success: function (data, status) {
-                    console.log(data.length)
-                    if (data.length > 0) {
-                        $("#aadhar_form").hide();
-                        $("#aadhar_para").html('AADHAR FORM ALREADY SUBMITED');
-
-                    }
-
-
-                }
-            });
-        }
-
-        fetch_data()
-
-        function fetch_data() {
-            var path = `/auth/fetchdata`
-
-            $.ajax({
-                url: path,
-                data: { comp_id: comp_id },
-                type: "POST",
-                success: function (data, status) {
-                    console.log(data)
-                    console.log(data.length)
-                    if (data.length > 0) {
-                        console.log("llllll")
-                        // var name=data[0].name
-                        $('#comp_id2').val(data[0].comp_id)
-                        $('#name2').val(data[0].name)
-                        $('#Fname2').val(data[0].Fname)
-                        // $('#dob2').val(data[0].dob)
-                        $('#age2').val(data[0].age)
-                        $('#address2').val(data[0].address)
-                        $('#district2').val(data[0].district)
-                        $('#desc2').val(data[0].desc)
-
-                    }
-
-
-                }
-            });
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-    </script>
-
 
 
 
@@ -227,15 +152,15 @@
 
 
         <!-- ################################ REGISTER FORM ##################################-->
-
-        <div class="container mt-4 ">
+        <p id="bank_para"></p>
+        <div id="bank_form" class="container mt-4 ">
             <div class="col-md-12 offset-md-0 form" style=" width: 80;">
                 <div class="card-header"> Bank Form </div>
                 <div class="card-body">
 
                     <form class="row g-3" action="/auth/bank" method="POST">
                         <div class="col-md-12">
-                            <label for="comp_id">comp_id</label>
+                            <label for="comp_id1">comp_id</label>
                             <input type="text" class="form-control" id="comp_id1" name="comp_id">
 
                         </div>
@@ -319,9 +244,6 @@
     </div>
 
 
-    <script>
-
-    </script>
 
 
 
@@ -418,6 +340,112 @@
         </div>
 
     </div>
+
+
+    <script>
+        function refreshPage() {
+            console.log("i am in refreash")
+            window.location.reload();
+        }
+
+
+
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const comp_id = urlParams.get('comp_id')
+        const comp_id1 = urlParams.get('comp_id')
+        console.log(comp_id);
+        console.log(comp_id1);
+        document.getElementById('comp_id1').value = comp_id;
+        document.getElementById('comp_id').value = comp_id;
+        //  $('#comp_id1').val(comp_id1)
+
+
+
+        hideaadhar()
+
+        function hideaadhar() {
+            var path = `/auth/aadharhide`
+
+            $.ajax({
+                url: path,
+                data: { comp_id: comp_id },
+                type: "POST",
+                success: function (data, status) {
+                    console.log(data.length)
+                    console.log(data)
+                    if (data.length > 0) {
+                        console.log("in aadhar hide")
+                        $("#aadhar_form").hide();
+                        $("#aadhar_para").html('AADHAR FORM ALREADY SUBMITED');
+                    }
+                }
+            });
+        }
+        // window.location.reload()
+        hidebank()
+
+        function hidebank() {
+            var path = `/auth/bankhide`
+
+            $.ajax({
+                url: path,
+                data: { comp_id1: comp_id1 },
+                type: "POST",
+                success: function (data, status) {
+                    console.log(data)
+                    console.log(data.length)
+                    if (data.length > 0) {
+                        $("#bank_form").hide();
+                        $("#bank_para").html('BANK FORM ALREADY SUBMITED');
+
+
+                    }
+
+
+                }
+            });
+        }
+
+
+
+        fetch_data()
+
+        function fetch_data() {
+            var path = `/auth/fetchdata`
+
+            $.ajax({
+                url: path,
+                data: { comp_id: comp_id },
+                type: "POST",
+                success: function (data, status) {
+                    console.log(data)
+                    console.log(data.length)
+                    if (data.length > 0) {
+                        console.log("llllll")
+                        // var name=data[0].name
+                        $('#comp_id2').val(data[0].comp_id)
+                        $('#name2').val(data[0].name)
+                        $('#Fname2').val(data[0].Fname)
+                        // $('#dob2').val(data[0].dob)
+                        $('#age2').val(data[0].age)
+                        $('#address2').val(data[0].address)
+                        $('#district2').val(data[0].district)
+                        $('#desc2').val(data[0].desc)
+
+                    }
+
+
+                }
+            });
+        }
+
+
+
+
+    </script>
+
+
 
 
 

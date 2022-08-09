@@ -24,6 +24,8 @@ router.get('/complaint',nodalController.display_complaint)
 
 router.get('/complaint1',bankController.display_complaint1)
 
+router.get('/showdetailsfor_nclb',nclbController.showdetailsfor_nclb)
+
 
 
 router.get('/aadhar_display',aadharController.display_aadhar)
@@ -45,6 +47,12 @@ router.post('/aadharreg',aadharController.aadharreg)
 
 router.post('/aadharlogin',aadharController.aadharlogin)
 
+
+
+router.post('/nclblogin',nclbController.nclblogin)
+
+router.post('/nclbreg',nclbController.nclbreg)
+
 ////////////////////////////////////////
 
 
@@ -64,6 +72,10 @@ router.post('/aadharcompleted',nodalController.aadharcompleted)
 
 
 router.post('/aadharhide',nodalController.aadharhide)
+
+
+
+router.post('/bankhide',nodalController.bankhide)
 
 router.post('/bank',bankController.bank)
 

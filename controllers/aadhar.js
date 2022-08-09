@@ -15,9 +15,9 @@ exports.aadhar=(req,res)=>{
          console.log(error);
        } else {
          console.log(results);
-         return res.render("getinfo", {
-           message: "data sent sucessfully",
-         });
+        //  return res.render("index", {
+        //    message: "data sent sucessfully",
+        //  });
        }
      }
    );
