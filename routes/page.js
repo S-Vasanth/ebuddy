@@ -76,5 +76,9 @@ router.get('/studentlogin',(req,res)=>{
    router.get('/nclbreg',(req,res)=>{
     res.render('nclbreg')
    })
+   
+   router.get('/scheme',(req,res)=>{
+    res.render('scheme')
+   })
   
 module.exports = router;

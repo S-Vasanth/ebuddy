@@ -77,11 +77,25 @@ router.post('/aadharhide',nodalController.aadharhide)
 
 router.post('/bankhide',nodalController.bankhide)
 
+router.post('/nodalupdate',nodalController.nodalupdate)
+
+
 router.post('/bank',bankController.bank)
 
-router.post('/fetchdata',bankController.fetchdata)
+router.post('/fetchnclbdata',bankController.fetchnclbdata)
+
+
+router.post('/fetchbankdata',aadharController.fetchbankdata)
 
 router.post('/nclb',nclbController.nclb)
+
+router.post('/nclbstatus',nclbController.nclbstatus)
+
+
+router.post('/nclbstatus1',nclbController.nclbstatus1)
+
+router.post('/nclbstatus2',nclbController.nclbstatus2)
+
 
 router.post('/aadhar',aadharController.aadhar)
 

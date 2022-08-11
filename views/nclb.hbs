@@ -46,12 +46,16 @@
                             <li><a class="dropdown-item " href="/bankui">BANK</a></li>
                         </ul>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link active " aria-current="page" href="/nclbreg">NCLB</a>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
 
     {{!-- ################################## COMPLIANT TABLE FOR NODAL ##################################/* --}}
+
 
 
 
@@ -68,19 +72,15 @@
                     <th data-field="s_no">S.No.</th>
                     <!-- <th data-field="asset_type">Asset Type</th> -->
                     <th data-field="name">NAME</th>
-                    <th data-field="Fname">Fname</th>
-                    <th data-field="dob">DOB</th>
-                    {{!-- <th data-field="pincode">PINCODE</th>
-                    <th data-field="verify">VERFIED</th> --}}
 
                     <th data-field="document" data-formatter="operateFormatter" class="text-center"
                         data-events="operateEvents" data-sortable="true">
-                        SHOW INFO</th>
-                    {{!-- <th data-field="bank_status">BANK STATUS</th>
-                    <th data-field="aadhar_status">AADHAR STATUS</th> --}}
-                    {{!-- <th data-field="document1" data-formatter="operateFormatter1" class="text-center"
+                        SCHEME</th>
+
+                    <th data-field="document1" data-formatter="operateFormatter1" class="text-center"
                         data-events="operateEvents" data-sortable="true">
-                        BANK</th> --}}
+                        view info</th>
+                    <th data-field="schsts">SCHEME TRACK</th>
 
                 </tr>
             </thead>
@@ -143,8 +143,22 @@
 
             return [
 
-                '<button class="btn btn-sm btn-primary showinfo"  data-toggle="modal" data-target="#exampleModal" title="Edit item">',
-                '<i style="color:White" ></i>SHOW INFO</button>',
+                '<button class="btn btn-sm btn-primary schemedesc" href="javascript:void(0)" title="Edit item">',
+                '<i style="color:White" ></i>SCHEME</button>',
+                '<a>',
+
+
+
+            ].join('')
+
+        }
+
+        function operateFormatter1(value, row, index) {
+
+            return [
+                `<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#myModal" id="modal">
+                 view info
+                 </button>`
 
 
 
@@ -155,56 +169,25 @@
 
         window.operateEvents = {
             /* BUTTON EDIT EVENT */
+            'click .schemedesc': function (e, value, row, index) {
+                var comp_id = row['comp_id'];
+                console.log(comp_id)
+                var data = JSON.stringify(row);
+                console.log("check document=" + data);
+                window.location.href = `/scheme?comp_id=${comp_id}`
+
+            },
+            /* BUTTON EDIT EVENT */
+            'click #modal': function (e, value, row, index) {
+                var comp_id = row['comp_id'];
+                console.log(comp_id)
+                $(".modal-body").html("NAME:" + row['name'])
+                $(".modal-body1").html("FATHER NAME:" + row['Fname'])
+                $(".modal-body2").html("ADDRESS:" + row['address'])
+                $(".modal-body3").html("DISTRICT:" + row['district'])
 
 
-            'click .showinfo': function (e, value, row, index) {
-
-                var name = row['Fname'];
-
-                console.log(row);
-                //  console.log("value of doc:--->" + value)
-
-
-
-                `<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body"  style="text-align: center;"> 
-                          <div class="form-group row">
-                              <h3>${name}</h3>   
-                              <div class="col-sm-6">
-
-                              </div>
-                          </div>
-
-
-                          <div class="form-group row">
-                              <h3>${name}</h3>  
-                              <div class="col-sm-6">
-                            
-                              </div>
-                          </div>
-
-
-
-                     </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-              </div>
-            </div>
-          </div>
-        </div>`
-
-
-            }
-
+            },
 
         }
 
@@ -241,7 +224,33 @@
 
 
 
+    <div class="modal" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
 
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Modal Heading</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <!-- Modal body -->
+                <p class="modal-body"></p>
+                <p class="modal-body1"></p>
+                <p class="modal-body2"></p>
+                <p class="modal-body3"></p>
+                <p class="modal-body4"></p>
+
+
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
 
 
 
@@ -255,6 +264,9 @@
 
 
     <script src="https://unpkg.com/bootstrap-table@1.20.2/dist/bootstrap-table.min.js"></script>
+
+
 </body>
+
 
 </html>

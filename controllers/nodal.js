@@ -347,3 +347,26 @@ exports.bankhide=(req,res)=>{
   
 //  res.send("form submited")
 }
+
+exports.nodalupdate=(req,res)=>{
+  // console.log(req.body.comp_id)
+  //  var comp_id=req.body.comp_id
+   const {comp_id,scheme,desc}=req.body
+    
+  getdb.query(
+     "UPDATE nodal SET scheme=?,description=? WHERE comp_id=?",[ scheme ,desc, comp_id],
+     (error, results) => {
+       if (error) {
+         console.log(error);
+       } else {
+         console.log(results);
+         return res.render("scheme", {
+           message: "Updated Successfully",
+         });
+       }
+     }
+   );
+ 
+  
+//  res.send("form submited")
+}

@@ -72,7 +72,7 @@
                 <div class="card-header"> Aadhar Form </div>
                 <div class="card-body">
 
-                    <form class="row g-3" action="/auth/aadhar" method="POST">
+                    <form id="mainForm" class="row g-3" action="" method="POST">
                         <div class="col-md-12">
                             <label for="comp_id">comp_id</label>
                             <input type="text" class="form-control" id="comp_id" name="comp_id">
@@ -120,12 +120,12 @@
                         <br>
                         <div class="col-md-5"></div>
                         <div class="col-md-6">
-                            <a href="http://localhost:5001/getinfo?comp_id=15">
-                                <button type="submit" class="btn btn-primary">get
-                                    Aadhar</button>
-                            </a>
 
-                            n>
+                            <button type="submit" onclick="hide_aadhar_form();" class="btn btn-primary">get
+                                Aadhar</button>
+
+
+
                         </div>
                     </form>
                 </div>
@@ -135,7 +135,9 @@
         </div>
 
     </div>
+    <script>
 
+    </script>
 
 
 
@@ -158,7 +160,7 @@
                 <div class="card-header"> Bank Form </div>
                 <div class="card-body">
 
-                    <form class="row g-3" action="/auth/bank" method="POST">
+                    <form id="mainForm2" class="row g-3" action="" method="POST">
                         <div class="col-md-12">
                             <label for="comp_id1">comp_id</label>
                             <input type="text" class="form-control" id="comp_id1" name="comp_id">
@@ -166,24 +168,24 @@
                         </div>
                         <div class="col-md-12">
                             <label for="name">Name</label>
-                            <input type="text" class="form-control" id="name" name="name">
+                            <input type="text" class="form-control" id="name1" name="name">
 
                         </div>
                         <div class="col-md-12">
                             <label for="text">Parent/Guardian Name</label>
-                            <input type="text" class="form-control" id="Fname" name="Fname">
+                            <input type="text" class="form-control" id="Fname1" name="Fname">
                         </div>
                         <div class="col-md-6">
                             <label for="text">Date of Birth</label>
-                            <input type="date" class="form-control" id="dob" name="dob">
+                            <input type="date" class="form-control" id="dob1" name="dob">
                         </div>
                         <div class="col-md-6">
                             <label for="text">Age</label>
-                            <input type="number" class="form-control" id="age" name="age">
+                            <input type="number" class="form-control" id="age1" name="age">
                         </div>
                         <div class="col-md-12">
                             <label for="text">Description</label>
-                            <input type="text" class="form-control" id="desc" name="desc">
+                            <input type="text" class="form-control" id="desc1" name="desc">
                         </div>
                         <label for="text">Gender</label>
                         <div class="form-group">
@@ -197,15 +199,15 @@
                         </div>
                         <div class="col-md-6">
                             <label for="text">Address</label>
-                            <input type="text" class="form-control" id="address" name="address">
+                            <input type="text" class="form-control" id="address1" name="address">
                         </div>
                         <div class="col-md-6">
                             <label for="text">District</label>
-                            <input type="text" class="form-control" id="district" name="district">
+                            <input type="text" class="form-control" id="district1" name="district">
                         </div>
                         <div class="col-md-6">
                             <label for="text">Aadhar Number</label>
-                            <input type="number" class="form-control" id="aadhar" name="aadhar">
+                            <input type="number" class="form-control" id="aadhar1" name="aadhar">
                         </div>
                         <div class="col-md-6">
                             Aadhar Id proof
@@ -231,7 +233,7 @@
                         <br>
                         <div class="col-md-5"></div>
                         <div class="col-md-6">
-                            <button type="submit" class="btn btn-primary">get bank</button>
+                            <button type="submit" onclick="hide_bank_form()" class="btn btn-primary">get bank</button>
                         </div>
                     </form>
                 </div>
@@ -266,7 +268,7 @@
                 <div class="card-header"> NCLB Form </div>
                 <div class="card-body">
 
-                    <form class="row g-3" action="/auth/nclb" method="POST">
+                    <form id="mainForm3" class="row g-3" action="" method="POST">
                         <div class="col-md-12">
                             <label for="comp_id">comp_id</label>
                             <input type="text" class="form-control" id="comp_id2" name="comp_id">
@@ -313,7 +315,7 @@
                         </div>
                         <div class="col-md-6">
                             <label for="text">Aadhar Number</label>
-                            <input type="number" class="form-control" id="aadhar" name="aadhar">
+                            <input type="number" class="form-control" id="aadhar2" name="aadhar">
                         </div>
                         <div class="col-md-6">
                             Aadhar Id proof
@@ -321,7 +323,7 @@
                         </div>
                         <div class="col-md-6">
                             <label for="text">Bank Account Number</label>
-                            <input type="number" class="form-control" id="bank" name="bank">
+                            <input type="number" class="form-control" id="bank2" name="bank">
                         </div>
                         <div class="col-md-6">
                             Bank proof
@@ -343,9 +345,68 @@
 
 
     <script>
-        function refreshPage() {
-            console.log("i am in refreash")
-            window.location.reload();
+        $("#mainForm").submit(function (event) {
+            event.preventDefault();
+            const formData = new URLSearchParams(new FormData(this));
+            fetch("/auth/aadhar",
+                {
+                    method: 'POST',
+                    mode: 'same-origin',
+                    credentials: 'same-origin',
+                    body: formData
+                })
+                .then(function (response) {
+                    console(response)
+                }).then(function (text) {
+                    //text is the server's response
+                });
+        });
+
+        $("#mainForm2").submit(function (event) {
+            event.preventDefault();
+            const formData = new URLSearchParams(new FormData(this));
+            fetch("/auth/bank",
+                {
+                    method: 'POST',
+                    mode: 'same-origin',
+                    credentials: 'same-origin',
+                    body: formData
+                })
+                .then(function (response) {
+                    console(response)
+                }).then(function (text) {
+                    //text is the server's response
+                });
+        });
+
+        $("#mainForm3").submit(function (event) {
+            event.preventDefault();
+            const formData = new URLSearchParams(new FormData(this));
+            fetch("/auth/nclb",
+                {
+                    method: 'POST',
+                    mode: 'same-origin',
+                    credentials: 'same-origin',
+                    body: formData
+                })
+                .then(function (response) {
+                    console(response)
+                }).then(function (text) {
+                    //text is the server's response
+                });
+        });
+
+
+        function hide_aadhar_form() {
+            console.log("in aadhar hide")
+            $("#aadhar_form").hide();
+            $("#aadhar_para").html('AADHAR FORM ALREADY SUBMITED');
+        }
+
+        function hide_bank_form() {
+            console.log("in aadhar hide")
+            $("#bank_form").hide();
+            $("#bank_para").html('BANK FORM ALREADY SUBMITED');
         }
 
 
@@ -409,10 +470,47 @@
 
 
 
-        fetch_data()
 
-        function fetch_data() {
-            var path = `/auth/fetchdata`
+
+        fetch_bankdata()
+
+        function fetch_bankdata() {
+            var path = `/auth/fetchbankdata`
+
+            $.ajax({
+                url: path,
+                data: { comp_id: comp_id },
+                type: "POST",
+                success: function (data, status) {
+                    console.log(data)
+                    console.log(data.length)
+                    if (data.length > 0) {
+                        console.log("llllll")
+                        // var name=data[0].name
+                        $('#comp_id1').val(data[0].comp_id)
+                        $('#name1').val(data[0].name)
+                        $('#Fname1').val(data[0].Fname)
+                        // $('#dob2').val(data[0].dob)
+                        $('#age1').val(data[0].age)
+                        $('#address1').val(data[0].address)
+                        $('#district1').val(data[0].district)
+                        $('#desc1').val(data[0].desc)
+
+                    }
+
+
+                }
+            });
+        }
+
+
+
+
+
+        fetch_nclbdata()
+
+        function fetch_nclbdata() {
+            var path = `/auth/fetchnclbdata`
 
             $.ajax({
                 url: path,

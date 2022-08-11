@@ -42,9 +42,12 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <li><a class="dropdown-item " href="/nodalui">NODAL</a></li>
-                            <li><a class="dropdown-item " href="/aadharui">E-AADHAR</a></li>
+                            <li><a class="dropdown-item " href="/aadharui">E-aadhar</a></li>
                             <li><a class="dropdown-item " href="/bankui">BANK</a></li>
                         </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active " aria-current="page" href="/nclbreg">NCLB</a>
                     </li>
                 </ul>
             </div>
@@ -60,7 +63,7 @@
 
 
 
-    <div class="col-md-8">
+    <div class="col-md-12">
 
         <table id="nodal_table" class="table table-bordered" data-pagination="true" data-sort-name="id">
             <thead>
@@ -73,11 +76,17 @@
                     <th data-field="pincode">PINCODE</th>
                     <th data-field="verify">VERFIED</th>
 
+
+
                     <th data-field="document" data-formatter="operateFormatter" class="text-center"
                         data-events="operateEvents" data-sortable="true">
                         GET INFO</th>
                     <th data-field="bank_status">BANK STATUS</th>
                     <th data-field="aadhar_status">AADHAR STATUS</th>
+                    <th data-field="scheme"></a>SCHEME</th>
+                    <th data-field="sch_status" data-formatter="operateFormatter1" class="text-center"
+                        data-events="operateEvents" data-sortable="true">
+                        SCHEME STATUS</th>
                     {{!-- <th data-field="document1" data-formatter="operateFormatter1" class="text-center"
                         data-events="operateEvents" data-sortable="true">
                         BANK</th> --}}
@@ -139,6 +148,24 @@
 
 
     <script>
+        function operateFormatter1(value, row, index) {
+
+            return [
+
+                '<button class="btn btn-sm btn-danger set" href="javascript:void(0)" title="Accept">',
+                '<i style="color:White" class="fa fa-hand-paper-o"></i></button>',
+                '</a> ',
+                '<button class="btn btn-sm btn-primary bet" data-toggle="modal" href="javascript:void(0)" title="Progress">',
+                '<i style="color:White;" class="fa fa-spinner"></i></button>&nbsp',
+                '</a>',
+                '<button class="btn btn-sm btn-success get" data-toggle="modal" href="javascript:void(0)" title="Completed">',
+                '<i style="color:White;" class="fa fa-check"></i></button>&nbsp',
+                '</a>'
+
+            ].join('')
+
+        }
+
         function operateFormatter(value, row, index) {
 
             return [
@@ -148,7 +175,7 @@
 
 
 
-            ].join('')
+            ].join('   ')
 
         }
 
@@ -162,11 +189,69 @@
                 console.log("check document=" + data);
                 window.location.href = `/getinfo?comp_id=${comp_id}`
 
+            },
+            'click .set': function (e, value, row, index) {
+                var comp_id = row['comp_id'];
+
+                //var comp_id = row['comp_id'];
+                console.log(comp_id)
+                //   console.log("check document=" + data);
+                var path = `/auth/nclbstatus`
+
+                $.ajax({
+                    url: path,
+                    data: { comp_id: comp_id },
+                    type: "POST",
+                    success: function (data, status) {
+
+                    },
+                });
+
+            },
+
+
+            'click .bet': function (e, value, row, index) {
+                var comp_id = row['comp_id'];
+
+                console.log(comp_id)
+
+                //   console.log("check document=" + data);
+                var path = `/auth/nclbstatus1`
+
+                $.ajax({
+                    url: path,
+                    data: { comp_id: comp_id },
+                    type: "POST",
+                    success: function (data, status) {
+
+                    },
+                });
+
+            },
+
+
+
+            'click .get': function (e, value, row, index) {
+                var comp_id = row['comp_id'];
+                console.log(comp_id)
+                //var comp_id = row['comp_id'];
+
+                //   console.log("check document=" + data);
+                var path = `/auth/nclbstatus2`
+
+                $.ajax({
+                    url: path,
+                    data: { comp_id: comp_id },
+                    type: "POST",
+                    success: function (data, status) {
+
+                    },
+                });
+
             }
 
+
         }
-
-
 
 
 

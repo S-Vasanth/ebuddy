@@ -15,9 +15,9 @@ exports.aadhar=(req,res)=>{
          console.log(error);
        } else {
          console.log(results);
-        //  return res.render("index", {
-        //    message: "data sent sucessfully",
-        //  });
+         return res.render("getinfo", {
+           message: "data sent sucessfully",
+         });
        }
      }
    );
@@ -99,3 +99,30 @@ exports.aadhar=(req,res)=>{
         
         
      }
+
+
+      
+  exports.fetchbankdata=(req,res)=>{
+
+    console.log("fetch"+req.body.comp_id)
+    var comp_id=req.body.comp_id
+    console.log(comp_id)
+    if(comp_id!=""){
+      getdb.query(
+        "SELECT * FROM aadhar  WHERE comp_id=?",[comp_id],
+         (error, results) => {
+           if (error) {
+             console.log(error);
+           } else {
+            res.send(results);
+           }
+             
+         }
+         
+       );
+       
+    }
+    
+  
+     
+  }

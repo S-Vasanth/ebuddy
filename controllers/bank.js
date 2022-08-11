@@ -104,26 +104,26 @@ exports.banklogin=(req,res)=>{
   
 
   
-  exports.fetchdata=(req,res)=>{
+  exports.fetchnclbdata=(req,res)=>{
 
-    // console.log("fetch"+req.body.comp_id)
-    // var comp_id=req.body.comp_id
-    // console.log(comp_id)
-    // if(comp_id!=""){
-    //   getdb.query(
-    //     "SELECT * FROM bank  WHERE comp_id=?",[comp_id],
-    //      (error, results) => {
-    //        if (error) {
-    //          console.log(error);
-    //        } else {
-    //         res.send(results);
-    //        }
+   // console.log("fetch"+req.body.comp_id)
+    var comp_id=req.body.comp_id
+    console.log(comp_id)
+    if(comp_id!=""){
+      getdb.query(
+        "SELECT * FROM bank  WHERE comp_id=?",[comp_id],
+         (error, results) => {
+           if (error) {
+             console.log(error);
+           } else {
+            res.send(results);
+           }
              
-    //      }
+         }
          
-    //    );
+       );
        
-    // }
+    }
     
   
      
