@@ -37,8 +37,8 @@ exports.aadhar=(req,res)=>{
              console.log(error);
            } else {
              console.log(results);
-             return res.render("aadharreg", {
-               message: "complaint received",
+             return res.render("aadharui", {
+               message: "Registered successfully",
              });
            }
          }
@@ -48,58 +48,65 @@ exports.aadhar=(req,res)=>{
     //  res.send("form submited")
    }
    
-   exports.aadharlogin=(req,res)=>{
-       console.log(req.body)
-       const {email,password,state,district}=req.body
+ 
      
+exports.display_aadhar=(req,res)=>{
+  console.log(req.body)
+  var district=req.body.district
+  console.log(district)
+ 
+   getdb.query(
+      "SELECT * from aadhar where district=? ",[district],
+      (error, results) => {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log(results);
+          let i = 1;
+           results.forEach((el) => {
+           el.s_no = `${i++}.`;
+           return el;
+           })
+          return res.send(results);
        
-       getdb.query(
-         "SELECT * FROM aadharreg WHERE username=?", [email],
-          (error, results) => {
-            if (error) {
-              console.log(error);
-            } else {
-              console.log(results);
-              let pass = results[0].password;
-              if(password==pass){
-               return res.render("aadhar");
-     
-              }
-             
-            }
-          }
-        );
+        }
+      }
       
-       
-     //  res.send("form submited")
-     }
-   
-   
-     exports.display_aadhar=(req,res)=>{
-   
-     
-       getdb.query(
-          "SELECT * from aadhar",
-          (error, results) => {
-            if (error) {
-              console.log(error);
-            } else {
-              console.log(results);
-              let i = 1;
-               results.forEach((el) => {
-               el.s_no = `${i++}.`;
-               return el;
-               })
-              return res.send(results);
-           
-            }
-          }
-          
-        );
-        
-        
-     }
+    );
+    
+    
+ }
 
+
+
+
+
+exports.aadharlogin=(req,res)=>{
+   console.log(req.body)
+   const {email,password,state,district}=req.body
+ 
+   
+   getdb.query(
+     "SELECT * FROM aadharreg WHERE username=?", [email],
+      (error, results) => {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log(results);
+          let pass = results[0].password;
+          if(password==pass){
+            let district=results[0].district
+           return res.render("aadhar",{district:district});
+ 
+          }
+         
+        }
+      }
+    );
+  
+   
+ //  res.send("form submited")
+ }
 
       
   exports.fetchbankdata=(req,res)=>{

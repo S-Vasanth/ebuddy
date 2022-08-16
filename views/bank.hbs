@@ -68,6 +68,7 @@
                     <th data-field="sts" data-formatter="operateFormatter" class="text-center"
                         data-events="operateEvents" data-sortable="true">
                         STATUS</th>
+                    <th data-field="show_status"></th>
 
 
                     {{!-- <th data-field="document" data-formatter="operateFormatter" class="text-center"
@@ -123,6 +124,14 @@
     {{!--
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> --}}
 
+    <form style="display-none" method="POST">
+
+
+        <label for="district">Email</label>
+        <input type="district" class="district" id="district" name="name" value={{district}}>
+
+
+    </form>
 
 
 
@@ -147,7 +156,6 @@
 
         }
 
-
         window.operateEvents = {
             /* BUTTON EDIT EVENT */
             'click .like': function (e, value, row, index) {
@@ -163,7 +171,8 @@
                     data: { comp_id: comp_id },
                     type: "POST",
                     success: function (data, status) {
-
+                        $('#bank_table').bootstrapTable('refresh')
+                        window.location.reload()
                     },
                 });
 
@@ -183,7 +192,8 @@
                     data: { comp_id: comp_id },
                     type: "POST",
                     success: function (data, status) {
-
+                        $('#bank_table').bootstrapTable('refresh')
+                        window.location.reload()
                     },
                 });
 
@@ -204,7 +214,8 @@
                     data: { comp_id: comp_id },
                     type: "POST",
                     success: function (data, status) {
-
+                        $('#bank_table').bootstrapTable('refresh')
+                        window.location.reload()
                     },
                 });
 
@@ -217,9 +228,9 @@
 
 
 
-
-        /*##################### LOAD DATA IN BOOTSTRAP TABLE ##########################*/
         var $table = $('#bank_table');
+        var district = $('#district').val()
+        console.log(district)
 
         // var path = '/function/complaint';
 
@@ -229,6 +240,7 @@
         });
 
         var path = "/auth/complaint1";
+        var district = $('#district').val()
 
         $(function () {
             $("#bank_table").bootstrapTable({ search: true, data: [] });
@@ -238,7 +250,8 @@
         function get_user() {
             $.ajax({
                 url: path,
-                type: "GET",
+                data: { district: district },
+                type: "POST",
                 success: function (data, status) {
                     console.log("complaint1=" + JSON.stringify(data))
                     let json = data;

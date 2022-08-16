@@ -81,4 +81,9 @@ router.get('/studentlogin',(req,res)=>{
     res.render('scheme')
    })
   
+
+   router.get('/otherscheme',(req,res)=>{
+    res.render('otherscheme')
+   })
+   
 module.exports = router;

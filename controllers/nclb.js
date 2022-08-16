@@ -113,7 +113,7 @@ exports.nclbstatus=(req,res)=>{
     // console.log("parse:::: " + comp_id.comp_id);
  
   getdb.query(
-     "UPDATE nclb SET schsts=? WHERE comp_id=?",["ACCEPTED",comp_id],
+    "UPDATE nclb,nodal SET nclb.schsts=?,nodal.show_status=? WHERE nodal.comp_id=nclb.comp_id AND nodal.comp_id=?",["ACCEPTED","ACCEPTED",comp_id],
      (error, results) => {
        if (error) {
          console.log(error);
@@ -141,7 +141,7 @@ exports.nclbstatus1=(req,res)=>{
     // console.log("parse:::: " + comp_id.comp_id);
  
   getdb.query(
-     "UPDATE nclb SET schsts=? WHERE comp_id=?",["IN PROCESS",comp_id],
+    "UPDATE nclb,nodal SET nclb.schsts=?,nodal.show_status=? WHERE nodal.comp_id=nclb.comp_id AND nodal.comp_id=?",["IN PROGRESS","IN PROGRESS",comp_id],
      (error, results) => {
        if (error) {
          console.log(error);
@@ -169,7 +169,7 @@ exports.nclbstatus2=(req,res)=>{
     // console.log("parse:::: " + comp_id.comp_id);
  
   getdb.query(
-     "UPDATE nclb SET schsts=? WHERE comp_id=?",["Process Completed",comp_id],
+    "UPDATE nclb,nodal SET nclb.schsts=?,nodal.show_status=? WHERE nodal.comp_id=nclb.comp_id AND nodal.comp_id=?",["COMPLETED","COMPLETED",comp_id],
      (error, results) => {
        if (error) {
          console.log(error);

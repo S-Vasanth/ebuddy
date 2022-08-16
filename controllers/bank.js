@@ -50,38 +50,38 @@ exports.bankreg=(req,res)=>{
  //  res.send("form submited")
 }
 
-exports.banklogin=(req,res)=>{
-    console.log(req.body)
-    const {bank_name,district,email,password}=req.body
+// exports.banklogin=(req,res)=>{
+//     console.log(req.body)
+//     const {bank_name,district,email,password}=req.body
   
     
-    getdb.query(
-      "SELECT * FROM bankreg WHERE email=?", [email],
-       (error, results) => {
-         if (error) {
-           console.log(error);
-         } else {
-           console.log(results);
-           let pass = results[0].password;
-           if(password==pass){
-            return res.render("bank");
+//     getdb.query(
+//       "SELECT * FROM bankreg WHERE email=?", [email],
+//        (error, results) => {
+//          if (error) {
+//            console.log(error);
+//          } else {
+//            console.log(results);
+//            let pass = results[0].password;
+//            if(password==pass){
+//             return res.render("bank");
   
-           }
+//            }
           
-         }
-       }
-     );
+//          }
+//        }
+//      );
    
     
-  //  res.send("form submited")
-  }
-
+//   //  res.send("form submited")
+//   }
 
   exports.display_complaint1=(req,res)=>{
+    var district=req.body.district
+    console.log(district)
 
-  
     getdb.query(
-       "SELECT * from bank",
+       "SELECT * from bank where district=? ",[district],
        (error, results) => {
          if (error) {
            console.log(error);
@@ -101,6 +101,62 @@ exports.banklogin=(req,res)=>{
      
      
   }
+  
+
+
+
+
+exports.banklogin=(req,res)=>{
+    console.log(req.body)
+    const {bank_name,district,email,password}=req.body
+  
+    
+    getdb.query(
+      "SELECT * FROM bankreg WHERE email=?", [email],
+       (error, results) => {
+         if (error) {
+           console.log(error);
+         } else {
+           console.log(results);
+           let pass = results[0].password;
+           if(password==pass){
+            let district=results[0].district
+            return res.render("bank",{district:district});
+  
+           }
+          
+         }
+       }
+     );
+   
+    
+  //  res.send("form submited")
+  }
+
+  // exports.display_complaint1=(req,res)=>{
+
+  
+  //   getdb.query(
+  //      "SELECT * from bank",
+  //      (error, results) => {
+  //        if (error) {
+  //          console.log(error);
+  //        } else {
+  //          console.log(results);
+  //          let i = 1;
+  //           results.forEach((el) => {
+  //           el.s_no = `${i++}.`;
+  //           return el;
+  //           })
+  //          return res.send(results);
+        
+  //        }
+  //      }
+       
+  //    );
+     
+     
+  // }
   
 
   

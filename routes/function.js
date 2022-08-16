@@ -19,16 +19,20 @@ const nclbController=require('./../controllers/nclb')
 
 router.post('/nodal',nodalController.nodal)
 
-router.get('/complaint',nodalController.display_complaint)
+router.post('/nodalnew',nodalController.nodalnew)
+router.post('/scheme_display',nodalController.scheme_display)
 
 
-router.get('/complaint1',bankController.display_complaint1)
+router.post('/complaint',nodalController.display_complaint)
+
+
+router.post('/complaint1',bankController.display_complaint1)
 
 router.get('/showdetailsfor_nclb',nclbController.showdetailsfor_nclb)
 
 
 
-router.get('/aadhar_display',aadharController.display_aadhar)
+router.post('/aadhar_display',aadharController.display_aadhar)
 
 
 router.post('/nodalreg',nodalController.nodalreg)
@@ -62,6 +66,9 @@ router.post('/nodalstatus',nodalController.nodalstatus)
 router.post('/nodalstatus1',nodalController.nodalstatus1)
 
 router.post('/nodalstatus2',nodalController.nodalstatus2)
+
+
+//router.post('/scheme_display',nodalController.scheme_display)
 
 
 router.post('/aadharaccept',nodalController.aadharaccept)

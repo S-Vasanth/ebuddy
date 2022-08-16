@@ -29,10 +29,11 @@ exports.nodal=(req,res)=>{
 
 
 exports.display_complaint=(req,res)=>{
-
-  
+  console.log(req.body)
+  var district=req.body.district
+  console.log(district)
   getdb.query(
-     "SELECT * from nodal",
+     "SELECT * from nodal where district=? ",[district],
      (error, results) => {
        if (error) {
          console.log(error);
@@ -92,7 +93,10 @@ exports.nodallogin=(req,res)=>{
          console.log(results);
          let pass = results[0].password;
          if(password==pass){
-          return res.render("nodal");
+          let district=results[0].district
+  
+          return res.render("nodal.hbs", {district:district});
+          //res.render("nodal");
 
          }
         
@@ -114,35 +118,7 @@ exports.nodalstatus=(req,res)=>{
     // console.log("parse:::: " + comp_id.comp_id);
  
   getdb.query(
-     "UPDATE nodal SET bank_status=? WHERE comp_id=?",["ACCEPTED",comp_id],
-     (error, results) => {
-       if (error) {
-         console.log(error);
-       } else {
-         console.log(results);
-         return res.render("bank", {
-           message: "Status updated",
-         });
-       }
-     }
-   );
- 
-  
-//  res.send("form submited")
-}
-
-exports.nodalstatus=(req,res)=>{
-  console.log(req.body.comp_id)
-   var comp_id=req.body.comp_id
-    // console.log(obj.comp_id)
-    // var reqData =  JSON.stringify(req.body);
-    // var comp_id=JSON.parse(reqData)
-   
-    // console.log("string :::: " + reqData);
-    // console.log("parse:::: " + comp_id.comp_id);
- 
-  getdb.query(
-     "UPDATE nodal SET bank_status=? WHERE comp_id=?",["ACCEPTED",comp_id],
+    "UPDATE bank,nodal SET nodal.bank_status=?,bank.show_status=? WHERE bank.comp_id=nodal.comp_id AND bank.comp_id=?",["ACCEPTED","ACCEPTED",comp_id],
      (error, results) => {
        if (error) {
          console.log(error);
@@ -170,7 +146,7 @@ exports.nodalstatus1=(req,res)=>{
     // console.log("parse:::: " + comp_id.comp_id);
  
   getdb.query(
-     "UPDATE nodal SET bank_status=? WHERE comp_id=?",["IN PROCESS",comp_id],
+    "UPDATE bank,nodal SET nodal.bank_status=?,bank.show_status=? WHERE bank.comp_id=nodal.comp_id AND bank.comp_id=?",["IN PROCESS","IN PROCESS",comp_id],
      (error, results) => {
        if (error) {
          console.log(error);
@@ -198,7 +174,7 @@ exports.nodalstatus2=(req,res)=>{
     // console.log("parse:::: " + comp_id.comp_id);
  
   getdb.query(
-     "UPDATE nodal SET bank_status=? WHERE comp_id=?",["Process Completed",comp_id],
+    "UPDATE bank,nodal SET nodal.bank_status=?,bank.show_status=? WHERE bank.comp_id=nodal.comp_id AND bank.comp_id=?",["COMPLETED","COMPLETED",comp_id],
      (error, results) => {
        if (error) {
          console.log(error);
@@ -226,7 +202,7 @@ exports.aadharaccept=(req,res)=>{
     // console.log("parse:::: " + comp_id.comp_id);
  
   getdb.query(
-     "UPDATE nodal SET aadhar_status=? WHERE comp_id=?",["ACCEPTED",comp_id],
+    "UPDATE aadhar,nodal SET nodal.aadhar_status=?,aadhar.show_status=? WHERE aadhar.comp_id=nodal.comp_id AND aadhar.comp_id=?",["ACCEPTED","ACCEPTED",comp_id],
      (error, results) => {
        if (error) {
          console.log(error);
@@ -255,7 +231,7 @@ exports.aadharprocess=(req,res)=>{
     // console.log("parse:::: " + comp_id.comp_id);
  
   getdb.query(
-     "UPDATE nodal SET aadhar_status=? WHERE comp_id=?",["IN PROCESS",comp_id],
+    "UPDATE aadhar,nodal SET nodal.aadhar_status=?,aadhar.show_status=? WHERE aadhar.comp_id=nodal.comp_id AND aadhar.comp_id=?",["IN PROCESS","IN PROCESS",comp_id],
      (error, results) => {
        if (error) {
          console.log(error);
@@ -282,7 +258,7 @@ exports.aadharcompleted=(req,res)=>{
     // console.log("parse:::: " + comp_id.comp_id);
  
   getdb.query(
-     "UPDATE nodal SET aadhar_status=? WHERE comp_id=?",["COMPLETED",comp_id],
+    "UPDATE aadhar,nodal SET nodal.aadhar_status=?,aadhar.show_status=? WHERE aadhar.comp_id=nodal.comp_id AND aadhar.comp_id=?",["COMPLETED","COMPLETED",comp_id],
      (error, results) => {
        if (error) {
          console.log(error);
@@ -298,6 +274,7 @@ exports.aadharcompleted=(req,res)=>{
   
 //  res.send("form submited")
 }
+
 
 exports.aadharhide=(req,res)=>{
   console.log(req)
@@ -361,6 +338,54 @@ exports.nodalupdate=(req,res)=>{
        } else {
          console.log(results);
          return res.render("scheme", {
+           message: "Updated Successfully",
+         });
+       }
+     }
+   );
+ 
+  
+//  res.send("form submited")
+}
+
+exports.scheme_display=(req,res)=>{
+
+  
+  getdb.query(
+     "SELECT * from nodalnew",
+     (error, results) => {
+       if (error) {
+         console.log(error);
+       } else {
+         console.log(results);
+         let i = 1;
+          results.forEach((el) => {
+          el.s_no = `${i++}.`;
+          return el;
+          })
+         return res.send(results);
+      
+       }
+     }
+     
+   );
+   
+   
+}
+
+exports.nodalnew=(req,res)=>{
+  // console.log(req.body.comp_id)
+  //  var comp_id=req.body.comp_id
+   const {entstate,desc}=req.body
+    
+  getdb.query(
+     "INSERT nodalnew SET entstate=?,description=? ",[ entstate ,desc],
+     (error, results) => {
+       if (error) {
+         console.log(error);
+       } else {
+         console.log(results);
+         return res.render("otherscheme", {
            message: "Updated Successfully",
          });
        }
