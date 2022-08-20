@@ -49,6 +49,9 @@
                     <li class="nav-item">
                         <a class="nav-link active " aria-current="page" href="/nclbreg">NCLB</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link active " aria-current="page" href="/banktrack">banktrack</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -93,6 +96,9 @@
                         SCHEME STATUS
                     <th data-field="show_status"></th>
                     </th>
+                    <th data-field="document3" data-formatter="operateFormatter3" class="text-center"
+                        data-events="operateEvents" data-sortable="true">
+                        UPLOAD PROOF</th>
                     {{!-- <th data-field="document1" data-formatter="operateFormatter1" class="text-center"
                         data-events="operateEvents" data-sortable="true">
                         BANK</th> --}}
@@ -159,8 +165,11 @@
     <form style="display-none" method="POST">
 
 
-        <label for="district">Email</label>
+        <label for="district">district</label>
         <input type="district" class="district" id="district" name="name" value={{district}}>
+
+        <label for="state">state</label>
+        <input type="state" class="state" id="state" name="state" value={{state}}>
 
 
     </form>
@@ -177,6 +186,20 @@
 
 
     <script>
+
+        function operateFormatter3(value, row, index) {
+
+            return [
+
+                '<button class="btn btn-sm btn-warning file" href="javascript:void(0)" title="Accept">',
+                '<i style="color:White" class="fa fa-hand-paper-o"></i></button>',
+                '</a> '
+
+
+            ].join('')
+
+        }
+
 
         function operateFormatter2(value, row, index) {
 
@@ -230,9 +253,13 @@
         function newscheme() {
 
             var path = `/auth/scheme_display`
+            var state = $('#state').val()
+            console.log(state)
+
             $.ajax({
                 url: path,
                 type: "POST",
+                data: { state: state },
                 success: function (data, status) {
                     console.log(data)
 
@@ -333,7 +360,20 @@
                 });
 
 
+            },
+            'click .file': function (e, value, row, index) {
+                var comp_id = row['comp_id'];
+                console.log(comp_id)
+                //var comp_id = row['comp_id'];
+
+                //   console.log("check document=" + data);
+                //  var path = `/auth/nclbstatus2`
+
+                window.location.href = `/proof?comp_id=${comp_id}`
+
+
             }
+
 
 
         }

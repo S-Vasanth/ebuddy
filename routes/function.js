@@ -57,6 +57,9 @@ router.post('/nclblogin',nclbController.nclblogin)
 
 router.post('/nclbreg',nclbController.nclbreg)
 
+
+router.post('/displayproof',nclbController.displayproof)
+
 ////////////////////////////////////////
 
 
@@ -105,5 +108,9 @@ router.post('/nclbstatus2',nclbController.nclbstatus2)
 
 
 router.post('/aadhar',aadharController.aadhar)
+
+router.post('/banktrack',nclbController.banktrack)
+
+router.post('/accstatus',nclbController.accstatus)
 
 module.exports=router

@@ -4,12 +4,12 @@ const getdb=db.getConnection()
 
 exports.bank=(req,res)=>{
   console.log(req.body)
-  const {comp_id,name,Fname,dob,age,gender,address,district}=req.body
+  const {comp_id,name,Fname,dob,description,age,gender,state,address,district}=req.body
 
   
   getdb.query(
      "INSERT INTO bank SET ?",
-     { comp_id:comp_id,name: name, Fname: Fname, dob: dob,age:age, gender: gender, address: address, district: district },
+     { comp_id:comp_id,name: name, Fname: Fname, dob: dob,age:age, gender: gender,state:state,description:description, address: address, district: district },
      (error, results) => {
        if (error) {
          console.log(error);
@@ -26,28 +26,29 @@ exports.bank=(req,res)=>{
  //  res.send("form submited")
 }
 
-exports.bankreg=(req,res)=>{
-   console.log(req.body)
-   const {bank_name,email,district,password}=req.body
 
-   
-   getdb.query(
-      "INSERT INTO bankreg SET ?",
-      { bank_name:bank_name, district:district, email:email ,password:password },
-      (error, results) => {
-        if (error) {
-          console.log(error);
-        } else {
-          console.log(results);
-          return res.render("bankreg", {
-            message: "complaint received",
-          });
-        }
-      }
-    );
+exports.bankreg=(req,res)=>{
+  console.log(req.body)
+  const {bank_name,email,district,password, state}=req.body
+
   
-   
- //  res.send("form submited")
+  getdb.query(
+     "INSERT INTO bankreg SET ?",
+     { bank_name:bank_name, district:district, email:email ,password:password ,state:state},
+     (error, results) => {
+       if (error) {
+         console.log(error);
+       } else {
+         console.log(results);
+         return res.render("bankui", {
+           message: "complaint received",
+         });
+       }
+     }
+   );
+ 
+  
+//  res.send("form submited")
 }
 
 // exports.banklogin=(req,res)=>{

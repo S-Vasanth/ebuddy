@@ -4,12 +4,12 @@ const getdb=db.getConnection()
 
 exports.aadhar=(req,res)=>{
   console.log(req.body)
-  const {comp_id,name,Fname,dob,desc,gender,address,district}=req.body
+  const {comp_id,name,Fname,dob,description,age,state,gender,address,district}=req.body
 
 
   getdb.query(
      "INSERT INTO aadhar SET ?",
-     { comp_id:comp_id,name: name, Fname: Fname, dob: dob, gender: gender, address: address, district: district },
+     { comp_id:comp_id,name: name, Fname: Fname, dob: dob,description:description,state:state,age:age, gender: gender, address: address, district: district },
      (error, results) => {
        if (error) {
          console.log(error);

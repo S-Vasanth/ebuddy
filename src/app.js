@@ -16,13 +16,22 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 
-
-const publicDirectory = path.join(__dirname,'./../public')
+const publicDirectory2 = path.join(__dirname,'./../public')
+const publicDirectory = path.join(__dirname,'./../public/images')
+const publicDirectory1 = path.join(__dirname,'./../views')
 
 
 app.use(express.static(publicDirectory))
+app.use(express.static(publicDirectory1))
+app.use(express.static(publicDirectory2))
 
 app.set('view engine','hbs')
+
+// app.use(express.static("images"));
+
+// app.get("/static", (req, res) => {
+//   res.render("static");
+// });
 
 const getdb=db.getConnection()
 getdb.connect((error)=>{

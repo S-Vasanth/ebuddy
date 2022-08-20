@@ -4,28 +4,30 @@ const getdb=db.getConnection()
 
 
 exports.nodal=(req,res)=>{
-   console.log(req.body)
-   const {address,city,district,pincode}=req.body
+  console.log(req.body)
+  const {address,city,district,pincode,state}=req.body
 
-   
-   getdb.query(
-      "INSERT INTO nodal SET ?",
-      { address: address, city: city, district: district,pincode:pincode },
-      (error, results) => {
-        if (error) {
-          console.log(error);
-        } else {
-          console.log(results);
-          return res.render("index", {
-            message: "complaint received",
-          });
-        }
-      }
-    );
   
-   
- //  res.send("form submited")
+  getdb.query(
+     "INSERT INTO nodal SET ?",
+     { address: address, city: city, district: district,pincode:pincode,state:state },
+     (error, results) => {
+       if (error) {
+         console.log(error);
+       } else {
+         console.log(results);
+         return res.render("index", {
+           message: "complaint received",
+         });
+       }
+     }
+   );
+ 
+  
+//  res.send("form submited")
 }
+
+
 
 
 exports.display_complaint=(req,res)=>{
@@ -54,21 +56,22 @@ exports.display_complaint=(req,res)=>{
    
 }
 
+
 exports.nodalreg=(req,res)=>{
   console.log(req.body)
-  const {district,email,password}=req.body
+  const {district,email,password,state}=req.body
 
   
   getdb.query(
      "INSERT INTO nodalreg SET ?",
-     { district:district,email:email,password:password},
+     { district:district,email:email,password:password,state:state},
      (error, results) => {
        if (error) {
          console.log(error);
        } else {
          console.log(results);
-         return res.render("index", {
-           message: "complaint received",
+         return res.render("nodalui", {
+           message: "Registered sucessfully",
          });
        }
      }
@@ -94,8 +97,9 @@ exports.nodallogin=(req,res)=>{
          let pass = results[0].password;
          if(password==pass){
           let district=results[0].district
+          let state=results[0].state
   
-          return res.render("nodal.hbs", {district:district});
+          return res.render("nodal.hbs", {district:district,state:state});
           //res.render("nodal");
 
          }
@@ -349,24 +353,24 @@ exports.nodalupdate=(req,res)=>{
 }
 
 exports.scheme_display=(req,res)=>{
-
-  
+  console.log(req.body.state)
+  let state=req.body.state
   getdb.query(
-     "SELECT * from nodalnew",
+     "SELECT * from nodalnew where entstate=? ORDER BY id DESC",[state],
      (error, results) => {
        if (error) {
          console.log(error);
        } else {
-         console.log(results);
-         let i = 1;
-          results.forEach((el) => {
-          el.s_no = `${i++}.`;
-          return el;
-          })
-         return res.send(results);
-      
-       }
-     }
+        console.log(results);
+        let i = 1;
+         results.forEach((el) => {
+         el.s_no = `${i++}.`;
+         return el;
+         })
+        return res.send(results);
+     
+      }
+ }
      
    );
    

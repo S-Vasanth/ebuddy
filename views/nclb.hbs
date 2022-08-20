@@ -46,6 +46,7 @@
                             <li><a class="dropdown-item " href="/bankui">BANK</a></li>
                         </ul>
                     </li>
+
                     <li class="nav-item">
                         <a class="nav-link active " aria-current="page" href="/nclbreg">NCLP</a>
                     </li>
@@ -80,7 +81,12 @@
                     <th data-field="document1" data-formatter="operateFormatter1" class="text-center"
                         data-events="operateEvents" data-sortable="true">
                         view info</th>
+
                     <th data-field="schsts">SCHEME TRACK</th>
+                    <th data-field="document2" data-formatter="operateFormatter2" class="text-center"
+                        data-events="operateEvents" data-sortable="true">
+                        view proof</th>
+                    <th data-field="accstatus">STIPEND TRACK</th>
 
 
 
@@ -166,6 +172,14 @@
             ].join('')
         }
 
+        function operateFormatter2(value, row, index) {
+            return [
+                `<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#myModal1" id="modal1">
+                 view Proof
+                 </button>`
+            ].join('')
+        }
+
 
 
 
@@ -188,6 +202,30 @@
                 $(".modal-body2").html("ADDRESS:" + row['address'])
                 $(".modal-body3").html("DISTRICT:" + row['district'])
 
+
+            },
+
+            'click #modal1': function (e, value, row, index) {
+                var comp_id = row['comp_id'];
+                console.log(comp_id)
+                var path = `/auth/displayproof`
+
+                $.ajax({
+                    url: path,
+                    data: { comp_id: comp_id },
+                    type: "POST",
+                    success: function (data, status) {
+                        console.log(data[0].pic1)
+                        console.log("complaint1" + JSON.stringify(data))
+                        $("#imageBox").html("<img style='width:498px;height:450px' src=\"" + "/" + comp_id + data[0].pic1 + "\">");
+                        $("#imageBox1").html("<img style='width:498px;height:450px' src=\"" + "/" + comp_id + data[0].pic2 + "\">");
+                        $("#imageBox2").html("<img style='width:498px;height:450px' src=\"" + "/" + comp_id + data[0].pic3 + "\">");
+                        $("#imageBox3").html("<img style='width:498px;height:450px' src=\"" + "/" + comp_id + data[0].pic4 + "\">");
+                        $("#imageBox4").html("<img style='width:498px;height:450px' src=\"" + "/" + comp_id + data[0].pic5 + "\">");
+
+
+                    },
+                });
 
             },
 
@@ -246,6 +284,7 @@
                 </div>
 
                 <!-- Modal body -->
+
                 <p class="modal-body"></p>
                 <p class="modal-body1"></p>
                 <p class="modal-body2"></p>
@@ -254,14 +293,48 @@
 
 
 
+
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal1">Close</button>
                 </div>
 
             </div>
         </div>
     </div>
+
+
+
+    <div class="modal" id="myModal1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">FINAL PROOF</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <!-- Modal body -->
+                {{!-- <img src="/14.jpeg">; --}}
+                <div id="imageBox"></div>
+                <div id="imageBox1"></div>
+                <div id="imageBox2"></div>
+                <div id="imageBox3"></div>
+                <div id="imageBox4"></div>
+
+
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal1">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
 
 
 
