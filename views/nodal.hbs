@@ -47,10 +47,13 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active " aria-current="page" href="/nclbreg">NCLB</a>
+                        <a class="nav-link active " aria-current="page" href="/nclbreg">NCLP</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active " aria-current="page" href="/banktrack">banktrack</a>
+                        <a class="nav-link active " aria-current="page" href="/banktrack">STIPENDTRACK</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active " aria-current="page" href="/aboutus">ABOUT US</a>
                     </li>
                 </ul>
             </div>
@@ -63,13 +66,12 @@
 
 
 
+    <br>
 
-
-
+    <h3 align="center">{{state}}-{{district}}</h3>
     <div class="col-md-12">
 
-        <table id="nodal_table" data-show-refresh="true" data-auto-refresh="true" class="table table-bordered"
-            data-pagination="true" data-sort-name="id">
+        <table id="nodal_table" data-pagination="true" data-sort-name="id">
             <thead>
                 <tr>
                     <th data-field="s_no">S.No.</th>
@@ -78,7 +80,7 @@
                     <th data-field="city">CITY</th>
                     <th data-field="district">DISTRICT</th>
                     <th data-field="pincode">PINCODE</th>
-                    <th data-field="verify">VERFIED</th>
+
 
 
 
@@ -113,7 +115,8 @@
 
     <div style="position: absolute;  bottom: 5%;right:5%;">
         <button class="btn btn-secondary btn-circle-xl" data-bs-toggle="modal" onclick="newscheme()"
-            data-bs-target="#myModal1" id="modal1"><i class="fa fa-paper-plane"></i></button>
+            data-bs-target="#myModal1" id="modal1"><i class="fa fa-envelope-o"
+                style="font-size:38px;color:white"></i></button>
 
         <!-- <a class="btn btn-primary pull-left"  href="#">Yes</a>
     <a class="btn btn-primary pull-right" href="#">No</a> -->
@@ -162,7 +165,7 @@
     {{!-- {{#if name}}
     <h4 class="alert alert-danger mt-4"></h4>
     {{/if}} --}}
-    <form style="display-none" method="POST">
+    <form hidden="hidden" method="POST">
 
 
         <label for="district">district</label>
@@ -191,8 +194,8 @@
 
             return [
 
-                '<button class="btn btn-sm btn-warning file" href="javascript:void(0)" title="Accept">',
-                '<i style="color:White" class="fa fa-hand-paper-o"></i></button>',
+                '<button class="btn btn-sm btn-primary file" href="javascript:void(0)" title="Accept">',
+                '<i style="color:White" class="fa fa-file"></i></button>',
                 '</a> '
 
 
@@ -225,7 +228,7 @@
                 '<button class="btn btn-sm btn-danger set" href="javascript:void(0)" title="Accept">',
                 '<i style="color:White" class="fa fa-hand-paper-o"></i></button>',
                 '</a> ',
-                '<button class="btn btn-sm btn-primary bet" data-toggle="modal" href="javascript:void(0)" title="Progress">',
+                '<button class="btn btn-sm btn-warning bet" data-toggle="modal" href="javascript:void(0)" title="Progress">',
                 '<i style="color:White;" class="fa fa-spinner"></i></button>&nbsp',
                 '</a>',
                 '<button class="btn btn-sm btn-success get" data-toggle="modal" href="javascript:void(0)" title="Completed">',

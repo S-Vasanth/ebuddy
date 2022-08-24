@@ -111,6 +111,10 @@ router.get('/banktrack',(req,res)=>{
     res.render('banktrack')
 })
 
+router.get('/aboutus',(req,res)=>{
+    res.render('aboutus')
+})
+
 
 
 

@@ -45,6 +45,12 @@
                             <li><a class="dropdown-item " href="/bankui">BANK</a></li>
                         </ul>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link active " aria-current="page" href="/nclbreg">NCLP</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active " aria-current="page" href="/aboutus">ABOUT US</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -73,7 +79,7 @@
                 <div class="card-body">
 
                     <form id="mainForm" class="row g-3" action="" method="POST">
-                        <div class="col-md-12">
+                        <div hidden="hidden" class="col-md-12">
                             <label for="comp_id">comp_id</label>
                             <input type="text" class="form-control" id="comp_id" name="comp_id">
 
@@ -86,6 +92,10 @@
                         <div class="col-md-12">
                             <label for="text">Parent/Guardian Name</label>
                             <input type="text" class="form-control" id="Fname" name="Fname">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="text">Parent/Guardian Mobile Number</label>
+                            <input type="Number" class="form-control" id="Fnum" name="Fnum">
                         </div>
                         <div class="col-md-6">
                             <label for="text">Date of Birth</label>
@@ -102,10 +112,10 @@
                         <label for="text">Gender</label>
                         <div class="form-group">
                             &nbsp;&nbsp;
-                            <input type="radio" name="gender" id="male">
+                            <input type="radio" name="gender" id="male" value="male">
                             &nbsp;
                             <label for="text">Male</label>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <input type="radio" name="gender" id="female">&nbsp;
+                            <input type="radio" name="gender" id="female" value="female">&nbsp;
                             <label for="text">Female</label>
 
                         </div>
@@ -380,7 +390,7 @@
                 <div class="card-body">
 
                     <form id="mainForm2" class="row g-3" action="" method="POST">
-                        <div class="col-md-12">
+                        <div hidden="hidden" class="col-md-12">
                             <label for="comp_id1">comp_id</label>
                             <input type="text" class="form-control" id="comp_id1" name="comp_id">
 
@@ -393,6 +403,10 @@
                         <div class="col-md-12">
                             <label for="text">Parent/Guardian Name</label>
                             <input type="text" class="form-control" id="Fname1" name="Fname">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="text">Parent/Guardian Mobile Number</label>
+                            <input type="Number" class="form-control" id="Fnum1" name="Fnum">
                         </div>
                         <div class="col-md-6">
                             <label for="text">Date of Birth</label>
@@ -409,10 +423,10 @@
                         <label for="text">Gender</label>
                         <div class="form-group">
                             &nbsp;&nbsp;
-                            <input type="radio" name="gender" id="male">
+                            <input type="radio" name="gender" id="male1">
                             &nbsp;
                             <label for="text">Male</label>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <input type="radio" name="gender" id="female">&nbsp;
+                            <input type="radio" name="gender" id="female1">&nbsp;
                             <label for="text">Female</label>
 
                         </div>
@@ -492,7 +506,7 @@
                 <div class="card-body">
 
                     <form id="mainForm3" class="row g-3" action="" method="POST">
-                        <div class="col-md-12">
+                        <div hidden="hidden" class="col-md-12">
                             <label for="comp_id">comp_id</label>
                             <input type="text" class="form-control" id="comp_id2" name="comp_id">
 
@@ -505,6 +519,10 @@
                         <div class="col-md-12">
                             <label for="text">Parent/Guardian Name</label>
                             <input type="text" class="form-control" id="Fname2" name="Fname">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="text">Parent/Guardian Mobile Number</label>
+                            <input type="Number" class="form-control" id="Fnum2" name="Fnum">
                         </div>
                         <div class="col-md-6">
                             <label for="text">Date of Birth</label>
@@ -539,6 +557,14 @@
                         <div class="col-md-6">
                             <label for="text">District</label>
                             <input type="text" class="form-control" id="district2" name="district">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="text">Email of Nodal</label>
+                            <input type="text" class="form-control" id="nodal_email" name="nodal_email">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="text">Nodal Contact No</label>
+                            <input type="text" class="form-control" id="nodal_contact" name="nodal_contact">
                         </div>
                         <div class="col-md-6">
                             <label for="text">Aadhar Number</label>
@@ -717,8 +743,14 @@
                         $('#comp_id1').val(data[0].comp_id)
                         $('#name1').val(data[0].name)
                         $('#Fname1').val(data[0].Fname)
+                        $('#Fnum1').val(data[0].Fnum)
                         $('#state1').val(data[0].state)
-                        // $('#dob2').val(data[0].dob)
+                        if (data[0].gender == "male") {
+                            $("#male1").prop("checked", true);
+                        } else {
+                            $("#female1").prop("checked", true);
+                        }
+                        $('#dob1').val(data[0].dob)
                         $('#age1').val(data[0].age)
                         $('#address1').val(data[0].address)
                         $('#district1').val(data[0].district)
@@ -753,8 +785,14 @@
                         $('#comp_id2').val(data[0].comp_id)
                         $('#name2').val(data[0].name)
                         $('#Fname2').val(data[0].Fname)
+                        $('#Fnum2').val(data[0].Fnum)
                         $('#state2').val(data[0].state)
-                        // $('#dob2').val(data[0].dob)
+                        if (data[0].gender == "male") {
+                            $("#male2").prop("checked", true);
+                        } else {
+                            $("#female2").prop("checked", true);
+                        }
+                        $('#dob2').val(data[0].dob)
                         $('#age2').val(data[0].age)
                         $('#address2').val(data[0].address)
                         $('#district2').val(data[0].district)

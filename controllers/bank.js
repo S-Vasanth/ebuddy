@@ -4,12 +4,12 @@ const getdb=db.getConnection()
 
 exports.bank=(req,res)=>{
   console.log(req.body)
-  const {comp_id,name,Fname,dob,description,age,gender,state,address,district}=req.body
+  const {comp_id,name,Fname,Fnum,dob,description,age,gender,state,address,district}=req.body
 
   
   getdb.query(
      "INSERT INTO bank SET ?",
-     { comp_id:comp_id,name: name, Fname: Fname, dob: dob,age:age, gender: gender,state:state,description:description, address: address, district: district },
+     { comp_id:comp_id,name: name,Fnum:Fnum, Fname: Fname, dob: dob,age:age, gender: gender,state:state,description:description, address: address, district: district },
      (error, results) => {
        if (error) {
          console.log(error);
@@ -40,9 +40,9 @@ exports.bankreg=(req,res)=>{
          console.log(error);
        } else {
          console.log(results);
-         return res.render("bankui", {
-           message: "complaint received",
-         });
+         return res.render("banklogin", {
+          message: "Registered Sucessfully...Please Login",
+        });
        }
      }
    );
@@ -122,7 +122,8 @@ exports.banklogin=(req,res)=>{
            let pass = results[0].password;
            if(password==pass){
             let district=results[0].district
-            return res.render("bank",{district:district});
+            let bank=results[0].bank_name
+            return res.render("bank",{bank:bank,district:district});
   
            }
           

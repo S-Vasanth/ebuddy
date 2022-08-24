@@ -4,12 +4,12 @@ const getdb=db.getConnection()
 
 exports.nclb=(req,res)=>{
   console.log(req.body)
-  const {comp_id,name,Fname,dob,age,gender,description,state,address,district,aadhar,bank}=req.body
+  const {comp_id,name,Fname,Fnum,dob,age,nodal_email,nodal_contact,gender,description,state,address,district,aadhar,bank}=req.body
 
   
   getdb.query(
      "INSERT INTO nclb SET ?",
-     { comp_id:comp_id,name: name, Fname: Fname, dob: dob,age:age,description:description,state:state,gender: gender, address: address, district: district ,aadhar:aadhar,bank:bank },
+     { comp_id:comp_id,name: name, Fname: Fname,Fnum:Fnum, dob: dob,age:age,description:description,state:state,gender: gender, address: address, district: district ,aadhar:aadhar,bank:bank,nodal_email:nodal_email ,nodal_contact:nodal_contact},
      (error, results) => {
        if (error) {
          console.log(error);
@@ -94,7 +94,7 @@ exports.nclblogin=(req,res)=>{
 
   
   getdb.query(
-     "SELECT * from nclb",
+     `SELECT comp_id,name,Fname,dob,age,address,description,gender,aadhar,bank,schsts,pic1,pic2,pic3,pic4,pic5,accstatus,state,district,CONCAT(state,"(",district,")") AS district_state,CONCAT(nodal_email,"(",nodal_contact,")") AS contact from nclb`,
      (error, results) => {
        if (error) {
          console.log(error);
@@ -234,7 +234,7 @@ exports.accstatus=(req,res)=>{
     // console.log("parse:::: " + comp_id.comp_id);
  
   getdb.query(
-    "UPDATE nclb,banktrack SET nclb.accstatus=?,banktrack.status=? WHERE banktrack.comp_id=nclb.comp_id AND banktrack.comp_id=?",["STPEND RECEIVED","STIPEND ACCEPTED",comp_id],
+    "UPDATE nclb,banktrack SET nclb.accstatus=?,banktrack.status=? WHERE banktrack.comp_id=nclb.comp_id AND banktrack.comp_id=?",["STIPEND RECEIVED","STIPEND ACCEPTED",comp_id],
      (error, results) => {
        if (error) {
          console.log(error);

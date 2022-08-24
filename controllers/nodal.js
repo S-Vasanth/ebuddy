@@ -70,8 +70,8 @@ exports.nodalreg=(req,res)=>{
          console.log(error);
        } else {
          console.log(results);
-         return res.render("nodalui", {
-           message: "Registered sucessfully",
+         return res.render("nodallogin", {
+          message: "Registered sucessfully Please Login ",
          });
        }
      }

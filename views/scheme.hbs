@@ -30,10 +30,6 @@
                     <li class="nav-item">
                         <a class="nav-link active " aria-current="page" href="/">COMPLAINT</a>
                     </li>
-                    {{!-- <li class="nav-item">
-                        <a class="nav-link active " href="/nodal">NODAL</a>
-                    </li> --}}
-
                     <li class="nav-item dropdown">
                         <a class="nav-link active dropdown-toggle " href="/login" id="navbarDropdownMenuLink"
                             role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -46,7 +42,10 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active " aria-current="page" href="/nclbreg">NCLB</a>
+                        <a class="nav-link active " aria-current="page" href="/nclbreg">NCLP</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active " aria-current="page" href="/aboutus">ABOUT US</a>
                     </li>
                 </ul>
             </div>
@@ -69,12 +68,12 @@
 
     <!-- ################################ REGISTER FORM ##################################-->
     <div id="aadhar_form" class="container mt-4 ">
-        <div class="col-md-12 offset-md-0 form" style=" width: 80;">
+        <div class="col-md-6 offset-md-3 form" style=" width: 80;">
             <div class="card-header"> Scheme Form </div>
             <div class="card-body">
 
                 <form class="row g-3" action="/auth/nodalupdate" method="POST">
-                    <div class="col-md-12">
+                    <div hidden="hidden" class="col-md-12">
                         <label for="comp_id">comp_id</label>
                         <input type="text" class="form-control" id="comp_id" name="comp_id">
                     </div>
@@ -84,7 +83,7 @@
                     </div>
                     <div class="col-md-12">
                         <label for="text">Description</label>
-                        <input type="text" class="form-control" id="desc" name="desc">
+                        <textarea type="text" class="form-control" id="desc" name="desc"></textarea>
                     </div>
                     <br>
                     <div class="col-md-5"></div>

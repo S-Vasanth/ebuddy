@@ -4,12 +4,12 @@ const getdb=db.getConnection()
 
 exports.aadhar=(req,res)=>{
   console.log(req.body)
-  const {comp_id,name,Fname,dob,description,age,state,gender,address,district}=req.body
+  const {comp_id,name,Fname,Fnum,dob,description,age,state,gender,address,district}=req.body
 
 
   getdb.query(
      "INSERT INTO aadhar SET ?",
-     { comp_id:comp_id,name: name, Fname: Fname, dob: dob,description:description,state:state,age:age, gender: gender, address: address, district: district },
+     { comp_id:comp_id,name: name, Fname: Fname,Fnum:Fnum, dob: dob,description:description,state:state,age:age, gender: gender, address: address, district: district },
      (error, results) => {
        if (error) {
          console.log(error);
@@ -37,8 +37,8 @@ exports.aadhar=(req,res)=>{
              console.log(error);
            } else {
              console.log(results);
-             return res.render("aadharui", {
-               message: "Registered successfully",
+             return res.render("aadharlogin", {
+              message: "Registered successfully... Please Login",
              });
            }
          }
