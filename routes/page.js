@@ -83,17 +83,7 @@ router.post('/upload',upload.array('multi-files'),(req,res)=>{
          }
        )
        );
-  //  var name=req.file.originalname;
-//    // console.log(name)
-//     var reName;
-//     if(/\s/g.test(name)){
-//         reName = name.replace(" ", "-");
-//         fs.rename(req.file.path, reName, function(err){
-//             if(err){
-//                 throw err;
-//             }
-//         });
-//     }}
+
     res.render('proof')
 })
     
@@ -215,5 +205,15 @@ router.get('/studentlogin',(req,res)=>{
    router.get('/otherscheme',(req,res)=>{
     res.render('otherscheme')
    })
+
+   router.get('/educationui',(req,res)=>{
+    res.render('educationui')
+   })
+
+   router.get('/educationlogin',(req,res)=>{
+    res.render('educationlogin')
+   })
+
+
    
 module.exports = router;

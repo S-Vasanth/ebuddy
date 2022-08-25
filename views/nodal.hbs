@@ -47,7 +47,7 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active " aria-current="page" href="/nclbreg">NCLP</a>
+                        <a class="nav-link active " aria-current="page" href="/nclbreg">SSA</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active " aria-current="page" href="/banktrack">STIPENDTRACK</a>
@@ -75,14 +75,18 @@
             <thead>
                 <tr>
                     <th data-field="s_no">S.No.</th>
+                    <th data-field="comp_id">COMP_ID</th>
                     <!-- <th data-field="asset_type">Asset Type</th> -->
                     <th data-field="address">ADDRESS</th>
                     <th data-field="city">CITY</th>
                     <th data-field="district">DISTRICT</th>
                     <th data-field="pincode">PINCODE</th>
+                    <th data-field="mnum">COMPLAINT'S NO</th>
 
 
-
+                    <th data-field="document4" data-formatter="operateFormatter4" class="text-center"
+                        data-events="operateEvents" data-sortable="true">
+                        PHOTO</th>
 
                     <th data-field="document" data-formatter="operateFormatter" class="text-center"
                         data-events="operateEvents" data-sortable="true">
@@ -101,6 +105,7 @@
                     <th data-field="document3" data-formatter="operateFormatter3" class="text-center"
                         data-events="operateEvents" data-sortable="true">
                         UPLOAD PROOF</th>
+
                     {{!-- <th data-field="document1" data-formatter="operateFormatter1" class="text-center"
                         data-events="operateEvents" data-sortable="true">
                         BANK</th> --}}
@@ -165,7 +170,7 @@
     {{!-- {{#if name}}
     <h4 class="alert alert-danger mt-4"></h4>
     {{/if}} --}}
-    <form hidden="hidden" method="POST">
+    <form method="POST">
 
 
         <label for="district">district</label>
@@ -189,6 +194,12 @@
 
 
     <script>
+        function operateFormatter4(value, row, index) {
+            return [
+                `<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#myModal2" id="modal1">
+'<i style="color:White" class="fa fa-address-book"></i></button>`
+            ].join('')
+        }
 
         function operateFormatter3(value, row, index) {
 
@@ -289,6 +300,25 @@
                 $(".modal-body2").html(" DESCRIPTION :" + row['description'])
             },
 
+            'click #modal2': function (e, value, row, index) {
+                var comp_id = row['comp_id'];
+                console.log(comp_id)
+                //  var path = `/auth/displayproof`
+
+                $.ajax({
+                    url: path,
+                    data: { comp_id: comp_id },
+                    type: "POST",
+                    success: function (data, status) {
+                        console.log(data[0].pic1)
+                        console.log("complaint1" + JSON.stringify(data))
+                        $("#imageBox").html('<img src="childlab.jpeg" />');
+
+
+                    },
+                });
+
+            },
 
             /* BUTTON EDIT EVENT */
             'click .getinfo': function (e, value, row, index) {
@@ -471,6 +501,33 @@
             </div>
         </div>
     </div>
+
+    <div class="modal" id="myModal2">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">PHOTO</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <!-- Modal body -->
+                <img src="/childlab.jpeg">;
+                <div id="imageBox"></div>
+
+
+
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal2">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 
 
 

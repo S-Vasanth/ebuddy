@@ -5,12 +5,12 @@ const getdb=db.getConnection()
 
 exports.nodal=(req,res)=>{
   console.log(req.body)
-  const {address,city,district,pincode,state}=req.body
+  const {name,desc,photo,address,city,district,pincode,state,landmark,pname,mnum,email}=req.body
 
   
   getdb.query(
      "INSERT INTO nodal SET ?",
-     { address: address, city: city, district: district,pincode:pincode,state:state },
+     { name: name, desc: desc,photo:photo, address: address, city: city, district: district,pincode:pincode,state:state ,landmark:landmark,pname:pname,mnum:mnum,email:email},
      (error, results) => {
        if (error) {
          console.log(error);
@@ -26,7 +26,6 @@ exports.nodal=(req,res)=>{
   
 //  res.send("form submited")
 }
-
 
 
 
@@ -332,7 +331,7 @@ exports.bankhide=(req,res)=>{
 exports.nodalupdate=(req,res)=>{
   // console.log(req.body.comp_id)
   //  var comp_id=req.body.comp_id
-   const {comp_id,scheme,desc}=req.body
+   const {comp_id,scheme,desc,state,district}=req.body
     
   getdb.query(
      "UPDATE nodal SET scheme=?,description=? WHERE comp_id=?",[ scheme ,desc, comp_id],
@@ -341,9 +340,21 @@ exports.nodalupdate=(req,res)=>{
          console.log(error);
        } else {
          console.log(results);
-         return res.render("scheme", {
-           message: "Updated Successfully",
-         });
+         getdb.query(
+          "INSERT INTO education SET ?",
+          { comp_id:comp_id,scheme:scheme,description:desc,state:state,district:district},
+          (error, results) => {
+            if (error) {
+              console.log(error);
+            } else {
+              console.log(results);
+              return res.render("scheme", {
+                message: "scheme sent sucessfully",
+              });
+            }
+          }
+        );
+        
        }
      }
    );

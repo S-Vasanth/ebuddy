@@ -94,7 +94,7 @@ exports.nclblogin=(req,res)=>{
 
   
   getdb.query(
-     `SELECT comp_id,name,Fname,dob,age,address,description,gender,aadhar,bank,schsts,pic1,pic2,pic3,pic4,pic5,accstatus,state,district,CONCAT(state,"(",district,")") AS district_state,CONCAT(nodal_email,"(",nodal_contact,")") AS contact from nclb`,
+     `SELECT comp_id,edusts,name,Fname,dob,age,address,description,gender,aadhar,bank,schsts,pic1,pic2,pic3,pic4,pic5,accstatus,state,district,CONCAT(state,"(",district,")") AS district_state,CONCAT(nodal_email,"(",nodal_contact,")") AS contact from nclb`,
      (error, results) => {
        if (error) {
          console.log(error);
@@ -113,6 +113,90 @@ exports.nclblogin=(req,res)=>{
    );
    
    
+}
+
+exports.nclbedustatus=(req,res)=>{
+  console.log(req.body.comp_id)
+   var comp_id=req.body.comp_id
+    // console.log(obj.comp_id)
+    // var reqData =  JSON.stringify(req.body);
+    // var comp_id=JSON.parse(reqData)
+   
+    // console.log("string :::: " + reqData);
+    // console.log("parse:::: " + comp_id.comp_id);
+ 
+  getdb.query(
+    "UPDATE nclb,education SET nclb.edusts=?,education.show_edustatus=? WHERE education.comp_id=nclb.comp_id AND education.comp_id=?",["ACCEPTED","ACCEPTED",comp_id],
+     (error, results) => {
+       if (error) {
+         console.log(error);
+       } else {
+         console.log(results);
+         return res.render("nclb", {
+           message: "Status updated",
+         });
+       }
+     }
+   );
+ 
+  
+//  res.send("form submited")
+}
+
+exports.nclbedustatus1=(req,res)=>{
+  console.log(req.body.comp_id)
+   var comp_id=req.body.comp_id
+    // console.log(obj.comp_id)
+    // var reqData =  JSON.stringify(req.body);
+    // var comp_id=JSON.parse(reqData)
+   
+    // console.log("string :::: " + reqData);
+    // console.log("parse:::: " + comp_id.comp_id);
+ 
+  getdb.query(
+    "UPDATE nclb,education SET nclb.edusts=?,education.show_edustatus=? WHERE education.comp_id=nclb.comp_id AND education.comp_id=?",["IN PROGRESS","IN PROGRESS",comp_id],
+     (error, results) => {
+       if (error) {
+         console.log(error);
+       } else {
+         console.log(results);
+         return res.render("nclb", {
+           message: "Status updated",
+         });
+       }
+     }
+   );
+ 
+  
+//  res.send("form submited")
+}
+
+exports.nclbedustatus2=(req,res)=>{
+  console.log(req.body.comp_id)
+   var comp_id=req.body.comp_id
+    // console.log(obj.comp_id)
+    // var reqData =  JSON.stringify(req.body);
+    // var comp_id=JSON.parse(reqData)
+   
+    // console.log("string :::: " + reqData);
+    // console.log("parse:::: " + comp_id.comp_id);
+ 
+  getdb.query(
+    "UPDATE nclb,education SET nclb.edusts=?,education.show_edustatus=? WHERE education.comp_id=nclb.comp_id AND education.comp_id=?",["ADMITTED IN SCHOOL","ADMITTED IN SCHOOL",comp_id],
+     (error, results) => {
+       if (error) {
+         console.log(error);
+       } else {
+         console.log(results);
+         return res.render("nclb", {
+           message: "Status updated",
+         });
+       }
+     }
+   );
+ 
+  
+//  res.send("form submited")
 }
 
 exports.nclbstatus=(req,res)=>{

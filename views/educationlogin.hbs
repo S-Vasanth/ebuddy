@@ -14,7 +14,6 @@
 
 <body>
     <!--########################### NAVBAR ################################-->
-    <!--########################### NAVBAR ################################-->
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
 
@@ -52,78 +51,41 @@
         </div>
     </nav>
 
-
-
-
-
-    {{!-- <div class="jumbotron">
-        <h1 class="display-4">WELCOME TO E-BUDDY</h1>
-        <p class="lead">This is a complaint website .which recevice your complaint and take step to clear it with
-            two weeks </p>
-        <hr class="my-4">
-        <p>Use this website to clear your problems around you </p>
-
-    </div> --}}
-
-
-    <!-- ################################ REGISTER FORM ##################################-->
-    <div style="text-align: center;display:center;" id="aadhar_form" class="container mt-4 ">
-        <div class="col-md-8 offset-md-2 form">
-            <div class="card-header"> <b>PROOF UPLOAD</b></div>
+    <!--####################################### ADMINLOGIN FORM #################################################-->
+    <div class="container mt-4 ">
+        <div class="col-md-6 offset-md-3 form" style=" width: 30rem;">
+            <div class="card-header"> EDUCATION LOGIN </div>
             <div class="card-body">
-                {{!--
-                <form class="row g-3" action="/upload" enctype="multipart/form-data" method="POST">
-                    <div class="col-md-12">
-                        <label for="comp_id">comp_id</label>
-                        <input type="text" class="form-control" id="comp_id" name="comp_id">
 
-                    </div>
-                    <div class="col-md-12">
-                        <input type="file" name="image">
-                    </div>
-                    <div class="col-md-5"></div>
-                    <div class="col-md-6">
-                        <button type="submit" class="btn btn-primary">SUBMIT</button>
-                    </div>
-                </form> --}}
-                <form action="/upload" enctype="multipart/form-data" method="post">
-                    <p>YOU MUST NEED TO UPLOAD EXACTLY FIVE PROOF AS PNG,JPEG,JPG</p>
-                    <div hidden="hidden" class="col-md-12">
-                        <label for="comp_id">comp_id</label>
-                        <input type="text" class="form-control" id="comp_id" name="comp_id">
+                <form action="/auth/educationlogin" method="POST">
 
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" name="email">
                     </div>
-                    <input type="file" name="multi-files" accept='image/*' multiple>
-                    <input type="submit" value="Upload">
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" name="password">
+                    </div>
+
+                    <br>
+                    <button type="submit" class="btn btn-primary">EDUCATION login</button>
                 </form>
             </div>
 
 
         </div>
+
+        {{#if message}}
+        <h4 class="alert alert-danger mt-4" align="center">{{message}}</h4>
+        {{/if}}
     </div>
-
-    </div>
-
-
-
-    <script>
-
-        const queryString = window.location.search;
-        const urlParams = new URLSearchParams(queryString);
-        const comp_id = urlParams.get('comp_id')
-        console.log(comp_id);
-        document.getElementById('comp_id').value = comp_id;
-
-    </script>
-
-
 
 
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
-
 </body>
 
 </html>

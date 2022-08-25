@@ -12,7 +12,16 @@ const aadharController=require('./../controllers/aadhar')
 const nclbController=require('./../controllers/nclb')
 
 
+const educationController=require('./../controllers/education')
 
+
+router.post('/educationreg',educationController.educationreg)
+
+
+router.post('/educationlogin',educationController.educationlogin)
+
+
+router.post('/show_education',educationController.show_education)
 //const display_complaint=require('./../controllers/nodal')
 
 
@@ -105,6 +114,15 @@ router.post('/nclbstatus',nclbController.nclbstatus)
 router.post('/nclbstatus1',nclbController.nclbstatus1)
 
 router.post('/nclbstatus2',nclbController.nclbstatus2)
+
+
+router.post('/nclbedustatus',nclbController.nclbedustatus)
+
+
+router.post('/nclbedustatus1',nclbController.nclbedustatus1)
+
+router.post('/nclbedustatus2',nclbController.nclbedustatus2)
+
 
 
 router.post('/aadhar',aadharController.aadhar)
