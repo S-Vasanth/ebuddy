@@ -60,7 +60,6 @@
                     <li class="nav-item">
                         <a class="nav-link active " aria-current="page" href="/aboutus">ABOUT US</a>
                     </li>
-
                     <li class="nav-item">
                         <a class="nav-link active " aria-current="page" href="/donate">DONATE</a>
                     </li>
@@ -76,31 +75,44 @@
 
 
     <br>
-    <h3 align="center">DEPARTMENT OF EDUCATION</h3>
+
     <h3 align="center">{{state}}-{{district}}</h3>
     <div class="col-md-12">
 
-        <table id="education_table" data-pagination="true" data-sort-name="id">
+        <table id="nodal_table" data-pagination="true" data-sort-name="id">
             <thead>
                 <tr>
                     <th data-field="s_no">S.No.</th>
+                    <th data-field="comp_id">COMP_ID</th>
                     <!-- <th data-field="asset_type">Asset Type</th> -->
-                    <th data-field="name">NAME</th>
+                    <th data-field="address">ADDRESS</th>
+                    <th data-field="city">CITY/VILLAGE</th>
                     <th data-field="district">DISTRICT</th>
-                    <th data-field="state">STATE</th>
-                    <th data-field="scheme">SCHEME</th>
-                    <th data-field="description">DESCRIPTION</th>
+                    <th data-field="pincode">PINCODE</th>
+                    <th data-field="mnum">COMPLAINT'S NO</th>
 
 
+                    <th data-field="document4" data-formatter="operateFormatter4" class="text-center"
+                        data-events="operateEvents" data-sortable="true">
+                        PHOTO</th>
 
+                    <th data-field="document" data-formatter="operateFormatter" class="text-center"
+                        data-events="operateEvents" data-sortable="true">
+                        GET INFO</th>
+                    <th data-field="bank_status">BANK STATUS</th>
+                    <th data-field="aadhar_status">AADHAR STATUS</th>
 
-
-
+                    <th data-field="document1" data-formatter="operateFormatter2" class="text-center"
+                        data-events="operateEvents" data-sortable="true">
+                        SCHEME</th>
                     <th data-field="sch_status" data-formatter="operateFormatter1" class="text-center"
                         data-events="operateEvents" data-sortable="true">
-                        EDUCATION STATUS
-                    <th data-field="show_edustatus"></th>
+                        SCHEME STATUS
+                    <th data-field="show_status"></th>
                     </th>
+                    <th data-field="document3" data-formatter="operateFormatter3" class="text-center"
+                        data-events="operateEvents" data-sortable="true">
+                        UPLOAD PROOF</th>
 
                     {{!-- <th data-field="document1" data-formatter="operateFormatter1" class="text-center"
                         data-events="operateEvents" data-sortable="true">
@@ -114,6 +126,14 @@
     </div>
 
 
+    <div style="position: absolute;  bottom: 5%;right:5%;">
+        <button class="btn btn-secondary btn-circle-xl" data-bs-toggle="modal" onclick="newscheme()"
+            data-bs-target="#myModal1" id="modal1"><i class="fa fa-envelope-o"
+                style="font-size:38px;color:white"></i></button>
+
+        <!-- <a class="btn btn-primary pull-left"  href="#">Yes</a>
+    <a class="btn btn-primary pull-right" href="#">No</a> -->
+    </div>
 
     </div>
 
@@ -182,6 +202,39 @@
 
 
     <script>
+        function operateFormatter4(value, row, index) {
+            return [
+                `<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#myModal2" id="modal2">
+'<i style="color:White" class="fa fa-address-book"></i></button>`
+            ].join('')
+        }
+
+        function operateFormatter3(value, row, index) {
+
+            return [
+
+                '<button class="btn btn-sm btn-primary file" href="javascript:void(0)" title="Accept">',
+                '<i style="color:White" class="fa fa-file"></i></button>',
+                '</a> '
+
+
+            ].join('')
+
+        }
+
+
+        function operateFormatter2(value, row, index) {
+
+            return [
+                `<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#myModal" id="modal">
+                 View Scheme
+                 </button>`
+
+
+
+            ].join('')
+
+        }
 
 
         function operateFormatter1(value, row, index) {
@@ -255,16 +308,45 @@
                 $(".modal-body2").html(" DESCRIPTION :" + row['description'])
             },
 
+            'click #modal2': function (e, value, row, index) {
+                var uuid = row['uuid'];
+                console.log(uuid)
+                var path = `/auth/childpic`
+
+                $.ajax({
+                    url: path,
+                    data: { uuid: uuid },
+                    type: "POST",
+                    success: function (data, status) {
+                        console.log(uuid)
+                        console.log(data[0].photo)
+
+
+                        $("#imageBox").html("<img style='width:498px;height:450px' src=\"" + "/" + data[0].photo + "\">");
+
+
+
+                    },
+                });
+
+            },
 
             /* BUTTON EDIT EVENT */
+            'click .getinfo': function (e, value, row, index) {
+                var comp_id = row['comp_id'];
+                console.log(comp_id)
+                var data = JSON.stringify(row);
+                console.log("check document=" + data);
+                window.location.href = `/getinfo?comp_id=${comp_id}`
 
+            },
             'click .set': function (e, value, row, index) {
                 var comp_id = row['comp_id'];
 
                 //var comp_id = row['comp_id'];
                 console.log(comp_id)
                 //   console.log("check document=" + data);
-                var path = `/auth/nclbedustatus`
+                var path = `/auth/nclbstatus`
 
                 $.ajax({
                     url: path,
@@ -285,7 +367,7 @@
                 console.log(comp_id)
 
                 //   console.log("check document=" + data);
-                var path = `/auth/nclbedustatus1`
+                var path = `/auth/nclbstatus1`
 
                 $.ajax({
                     url: path,
@@ -309,7 +391,7 @@
                 //var comp_id = row['comp_id'];
 
                 //   console.log("check document=" + data);
-                var path = `/auth/nclbedustatus2`
+                var path = `/auth/nclbstatus2`
 
                 $.ajax({
                     url: path,
@@ -323,11 +405,26 @@
 
 
             },
+            'click .file': function (e, value, row, index) {
+                var comp_id = row['comp_id'];
+                console.log(comp_id)
+                //var comp_id = row['comp_id'];
+
+                //   console.log("check document=" + data);
+                //  var path = `/auth/nclbstatus2`
+
+                window.location.href = `/proof?comp_id=${comp_id}`
+
+
+            }
+
+
+
         }
 
 
         /*##################### LOAD DATA IN BOOTSTRAP TABLE ##########################*/
-        var $table = $('#education_table');
+        var $table = $('#nodal_table');
         var district = $('#district').val()
 
         // var path = '/function/complaint';
@@ -338,11 +435,11 @@
             get_user();
         });
 
-        var path = "/auth/show_education";
+        var path = "/auth/complaintadmin";
         var district = $('#district').val()
         console.log(district);
         $(function () {
-            $("#education_table").bootstrapTable({ search: true, data: [] });
+            $("#nodal_table").bootstrapTable({ search: true, data: [] });
 
             get_user();
         });
@@ -355,7 +452,7 @@
                 success: function (data, status) {
                     console.log("complaint=" + JSON.stringify(data))
                     let json = data;
-                    $("#education_table").bootstrapTable("load", data);
+                    $("#nodal_table").bootstrapTable("load", data);
                 },
             });
         }
@@ -387,6 +484,60 @@
         </div>
     </div>
 
+
+
+
+    <div class="modal" id="myModal1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title"> NEW SCHEMES</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <!-- Modal body -->
+                <p class="modal-body1"></p>
+                <p class="modal-body2"></p>
+
+
+
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="myModal2">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">CHILD PHOTO</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <!-- Modal body -->
+
+                <div id="imageBox"></div>
+
+
+
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal2">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
 
 
 

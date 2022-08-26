@@ -94,7 +94,7 @@ exports.nclblogin=(req,res)=>{
 
   
   getdb.query(
-     `SELECT comp_id,edusts,name,Fname,dob,age,address,description,gender,aadhar,bank,schsts,pic1,pic2,pic3,pic4,pic5,accstatus,state,district,CONCAT(state,"(",district,")") AS district_state,CONCAT(nodal_email,"(",nodal_contact,")") AS contact from nclb`,
+     `SELECT comp_id,edusts,name,Fname,dob,age,address,description,gender,schemerequest,aadhar,bank,schsts,pic1,pic2,pic3,pic4,pic5,accstatus,state,district,CONCAT(state,"(",district,")") AS district_state,CONCAT(nodal_email,"(",nodal_contact,")") AS contact from nclb`,
      (error, results) => {
        if (error) {
          console.log(error);
@@ -283,7 +283,34 @@ exports.nclbstatus2=(req,res)=>{
 //  res.send("form submited")
 }
 
+exports.schreq=(req,res)=>{
+  
+  const {desc, comp_id}=req.body
+   console.log(req.body)
+   // console.log(obj.comp_id)
+   // var reqData =  JSON.stringify(req.body);
+   // var comp_id=JSON.parse(reqData)
+  
+   // console.log("string :::: " + reqData);
+   // console.log("parse:::: " + comp_id.comp_id);
 
+ getdb.query(
+   "UPDATE nclb SET schemerequest=? WHERE comp_id=?",[desc,comp_id],
+    (error, results) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(results);
+        return res.render("student", {
+          message: "SCHEME REQUEST SEND SUCCESFULLY",
+        });
+      }
+    }
+  );
+
+ 
+//  res.send("form submited")
+}
 
 exports.displayproof=(req,res)=>{
   console.log(req.body)

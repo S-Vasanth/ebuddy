@@ -21,6 +21,9 @@ const nclbController=require('./../controllers/nclb')
 const educationController=require('./../controllers/education')
 
 
+const adminController=require('./../controllers/admin')
+
+
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
         cb(null, 'public/comp_image/');
@@ -51,11 +54,15 @@ router.post('/show_education',educationController.show_education)
 router.post('/nodal',nodalController.nodal)
 
 router.post('/nodalnew',nodalController.nodalnew)
+
 router.post('/scheme_display',nodalController.scheme_display)
 
 
 router.post('/complaint',nodalController.display_complaint)
 
+router.post('/schreq',nclbController.schreq)
+
+router.post('/complaintadmin',adminController.complaintadmin)
 
 router.post('/complaint1',bankController.display_complaint1)
 
@@ -65,6 +72,12 @@ router.get('/showdetailsfor_nclb',nclbController.showdetailsfor_nclb)
 
 router.post('/aadhar_display',aadharController.display_aadhar)
 
+
+router.post('/penciladminreg',adminController.penciladminreg)
+
+
+
+router.post('/penciladminlogin',adminController.penciladminlogin)
 
 router.post('/nodalreg',nodalController.nodalreg)
 

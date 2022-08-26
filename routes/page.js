@@ -105,9 +105,19 @@ router.get('/aboutus',(req,res)=>{
     res.render('aboutus')
 })
 
+router.get('/penciladminui',(req,res)=>{
+    res.render('penciladminui')
+})
+
+router.get('/penciladminlogin',(req,res)=>{
+    res.render('penciladminlogin')
+})
 
 
 
+router.get('/stud',(req,res)=>{
+    res.render('student')
+})
 
 
 

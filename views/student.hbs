@@ -14,6 +14,7 @@
 
 <body>
     <!--########################### NAVBAR ################################-->
+    <!--########################### NAVBAR ################################-->
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
 
@@ -32,13 +33,16 @@
                     <li class="nav-item">
                         <a class="nav-link active " aria-current="page" href="/">COMPLAINT</a>
                     </li>
+                    {{!-- <li class="nav-item">
+                        <a class="nav-link active " href="/nodal">NODAL</a>
+                    </li> --}}
+
                     <li class="nav-item dropdown">
                         <a class="nav-link active dropdown-toggle " href="/login" id="navbarDropdownMenuLink"
                             role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             LOGIN
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item " href="/penciladminui">PENCIL ADMIN</a></li>
                             <li><a class="dropdown-item " href="/nodalui">NODAL</a></li>
                             <li><a class="dropdown-item " href="/aadharui">E-AADHAR</a></li>
                             <li><a class="dropdown-item " href="/bankui">BANK</a></li>
@@ -59,35 +63,61 @@
         </div>
     </nav>
 
-    <!--####################################### ADMINLOGIN FORM #################################################-->
-    <div class="container mt-4 ">
-        <div class="col-md-6 offset-md-3 form" style=" width: 30rem;">
-            <div class="card-header"> EDUCATION LOGIN </div>
-            <div class="card-body">
+    <div class="container mt-4">
 
-                <form action="/auth/educationlogin" method="POST">
+        {{!-- <div class="jumbotron">
+            <h1 class="display-4">WELCOME TO E-BUDDY</h1>
+            <p class="lead">This is a complaint website .which recevice your complaint and take step to clear it with
+                two weeks </p>
+            <hr class="my-4">
+            <p>Use this website to clear your problems around you </p>
 
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email" name="email">
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" class="form-control" id="password" name="password">
-                    </div>
+        </div> --}}
 
-                    <br>
-                    <button type="submit" class="btn btn-primary">EDUCATION login</button>
-                </form>
+
+        <!-- ################################ REGISTER FORM ##################################-->
+
+        <div class="container mt-4 ">
+            <div class="col-md-6 offset-md-3 form" style=" width: 30rem;">
+                <div class="card-header"> Student Requisition Form </div>
+                <div class="card-body">
+
+                    <form action="/auth/schreq" method="POST">
+
+                        <div class="form-group">
+                            <label for="comp_id">Student Id</label>
+                            <input type="text" class="form-control" id="comp_id" name="comp_id">
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" id="name" name="name">
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="desc">Description</label>
+                            <input type="text" class="form-control" id="desc" name="desc">
+
+                        </div>
+                        <br>
+
+                        <button type="submit" class="btn btn-primary">Submit </button>
+                    </form>
+                </div>
+
+
             </div>
-
-
         </div>
 
-        {{#if message}}
-        <h4 class="alert alert-danger mt-4" align="center">{{message}}</h4>
-        {{/if}}
+
     </div>
+
+    </div>
+
+
+
 
 
     <!-- JavaScript Bundle with Popper -->
