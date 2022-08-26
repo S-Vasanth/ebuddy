@@ -28,6 +28,9 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
+                        <a class="nav-link active " aria-current="page" href="/home">HOME</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link active " aria-current="page" href="/">COMPLAINT</a>
                     </li>
                     {{!-- <li class="nav-item">
@@ -43,6 +46,7 @@
                             <li><a class="dropdown-item " href="/nodalui">NODAL</a></li>
                             <li><a class="dropdown-item " href="/aadharui">E-AADHAR</a></li>
                             <li><a class="dropdown-item " href="/bankui">BANK</a></li>
+                            <li><a class="dropdown-item " href="/educationui">EDUCATION</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
@@ -50,6 +54,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active " aria-current="page" href="/aboutus">ABOUT US</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active " aria-current="page" href="/donate">DONATE</a>
                     </li>
                 </ul>
             </div>
@@ -75,7 +82,7 @@
                 <div class="card-header"> Complaint Form </div>
                 <div class="card-body">
 
-                    <form action="/auth/nodal" method="POST">
+                    <form action="/auth/nodal" enctype="multipart/form-data" method="POST">
 
                         <div class="form-group">
                             <label for="name">Name</label>
@@ -103,8 +110,26 @@
                         </div>
                         <div class="form-group">
 
-                            <label for="inputState">City<b style="color:red;">*</b></label>
-                            <input type="text" class="form-control" id="city" name="city">
+                            <label for="inputcity">City<b style="color:red;">*</b></label>
+                            <select class="form-control" id="city" name="city">
+
+                                <option value="Tondiarpet(044-25911727)">Tondiarpet</option>
+                                <option value="Thiruvottiyur(044-25991997)">Thiruvottiyur</option>
+                                <option value="Purasaiwalkam(044-25388978)">Purasaiwalkam</option>
+                                <option value="perambur(004-25375131)">perambur</option>
+                                <option value="Madhavaram(044-26590193)">Madhavaram</option>
+                                <option value="Ayanavaram(044-26431726)">Ayanavaram</option>
+                                <option value="Aminjikarai(044-26201727)">Aminjikarai</option>
+                                <option value="Ambaltur(044-26252785)">Ambaltur</option>
+                                <option value="Egmore(044-28361890)">Egmore</option>
+                                <option value="Maduravoyal(044-23861386)">Maduravoyal</option>
+                                <option value="Mambalam(044-24891464)">Mambalam</option>
+                                <option value="Mylapore(044-24331292)">Mylapore</option>
+                                <option value="Velacherry(044-22431737)">Velacherry</option>
+                                <option value="Guindy(044-22351850)">Guindy</option>
+                                <option value="Alandur(044-22320580)">Alandur</option>
+                                <option value="Sholinganallur(044-24501700)">Sholinganallur</option>
+                            </select>
 
                         </div>
                         <div class="form-group">

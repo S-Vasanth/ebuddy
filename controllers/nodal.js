@@ -1,16 +1,25 @@
+const { v4: uuidv4 } = require('uuid');
+
 const db = require('../db')
 
 const getdb=db.getConnection()
 
 
+
 exports.nodal=(req,res)=>{
   console.log(req.body)
-  const {name,desc,photo,address,city,district,pincode,state,landmark,pname,mnum,email}=req.body
 
+  const {name,desc,address,city,district,pincode,state,landmark,pname,mnum,email}=req.body
+ 
+
+   console.log(uuidv4())
+   var uuid=uuidv4()
+  var photo=req.file.originalname
+  console.log(photo)
   
   getdb.query(
      "INSERT INTO nodal SET ?",
-     { name: name, desc: desc,photo:photo, address: address, city: city, district: district,pincode:pincode,state:state ,landmark:landmark,pname:pname,mnum:mnum,email:email},
+     { name: name,uuid:uuid, desc: desc,photo:photo, address: address, city: city, district: district,pincode:pincode,state:state ,landmark:landmark,pname:pname,mnum:mnum,email:email},
      (error, results) => {
        if (error) {
          console.log(error);
@@ -26,6 +35,31 @@ exports.nodal=(req,res)=>{
   
 //  res.send("form submited")
 }
+
+
+// exports.nodal=(req,res)=>{
+//   console.log(req.body)
+//   const {name,desc,photo,address,city,district,pincode,state,landmark,pname,mnum,email}=req.body
+
+  
+//   getdb.query(
+//      "INSERT INTO nodal SET ?",
+//      { name: name, desc: desc,photo:photo, address: address, city: city, district: district,pincode:pincode,state:state ,landmark:landmark,pname:pname,mnum:mnum,email:email},
+//      (error, results) => {
+//        if (error) {
+//          console.log(error);
+//        } else {
+//          console.log(results);
+//          return res.render("index", {
+//            message: "complaint received",
+//          });
+//        }
+//      }
+//    );
+ 
+  
+// //  res.send("form submited")
+// }
 
 
 
@@ -403,6 +437,30 @@ exports.nodalnew=(req,res)=>{
          return res.render("otherscheme", {
            message: "Updated Successfully",
          });
+       }
+     }
+   );
+ 
+  
+//  res.send("form submited")
+}
+
+
+
+exports.childpic=(req,res)=>{
+  console.log(req.body)
+  const uuid=req.body.uuid
+
+  
+  getdb.query(
+    "SELECT photo FROM nodal WHERE uuid=?", [uuid],
+     (error, results) => {
+       if (error) {
+         console.log(error);
+       } else {
+         console.log(results);
+         return res.send(results);
+        
        }
      }
    );

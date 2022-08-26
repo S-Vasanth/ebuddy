@@ -2,6 +2,12 @@ const express = require('express')
 
 const router=express.Router()
 
+const path = require('path')
+
+const multer = require('multer')
+
+const fs= require('fs')
+
 const nodalController=require('./../controllers/nodal')
 
 const bankController=require('./../controllers/bank')
@@ -14,6 +20,22 @@ const nclbController=require('./../controllers/nclb')
 
 const educationController=require('./../controllers/education')
 
+
+const storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, 'public/comp_image/');
+    },
+  
+    
+    filename: function (req, file, cb) {
+    
+        cb(null, file.originalname)
+      }
+    })
+//const upload = multer({ dest: 'public/comp_image/' })
+var upload = multer({ storage: storage })
+
+router.post('/nodal',upload.single("photo"),nodalController.nodal)
 
 router.post('/educationreg',educationController.educationreg)
 
@@ -68,6 +90,9 @@ router.post('/nclbreg',nclbController.nclbreg)
 
 
 router.post('/displayproof',nclbController.displayproof)
+
+
+router.post('/childpic',nodalController.childpic)
 
 ////////////////////////////////////////
 

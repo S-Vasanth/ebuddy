@@ -29,6 +29,9 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
+                        <a class="nav-link active " aria-current="page" href="/home">HOME</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link active " aria-current="page" href="/">COMPLAINT</a>
                     </li>
                     {{!-- <li class="nav-item">
@@ -44,6 +47,7 @@
                             <li><a class="dropdown-item " href="/nodalui">NODAL</a></li>
                             <li><a class="dropdown-item " href="/aadharui">E-aadhar</a></li>
                             <li><a class="dropdown-item " href="/bankui">BANK</a></li>
+                            <li><a class="dropdown-item " href="/educationui">EDUCATION</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
@@ -54,6 +58,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active " aria-current="page" href="/aboutus">ABOUT US</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active " aria-current="page" href="/donate">DONATE</a>
                     </li>
                 </ul>
             </div>
@@ -78,7 +85,7 @@
                     <th data-field="comp_id">COMP_ID</th>
                     <!-- <th data-field="asset_type">Asset Type</th> -->
                     <th data-field="address">ADDRESS</th>
-                    <th data-field="city">CITY</th>
+                    <th data-field="city">CITY/VILLAGE</th>
                     <th data-field="district">DISTRICT</th>
                     <th data-field="pincode">PINCODE</th>
                     <th data-field="mnum">COMPLAINT'S NO</th>
@@ -170,7 +177,7 @@
     {{!-- {{#if name}}
     <h4 class="alert alert-danger mt-4"></h4>
     {{/if}} --}}
-    <form method="POST">
+    <form hidden="hidden" method="POST">
 
 
         <label for="district">district</label>
@@ -196,7 +203,7 @@
     <script>
         function operateFormatter4(value, row, index) {
             return [
-                `<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#myModal2" id="modal1">
+                `<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#myModal2" id="modal2">
 '<i style="color:White" class="fa fa-address-book"></i></button>`
             ].join('')
         }
@@ -301,18 +308,21 @@
             },
 
             'click #modal2': function (e, value, row, index) {
-                var comp_id = row['comp_id'];
-                console.log(comp_id)
-                //  var path = `/auth/displayproof`
+                var uuid = row['uuid'];
+                console.log(uuid)
+                var path = `/auth/childpic`
 
                 $.ajax({
                     url: path,
-                    data: { comp_id: comp_id },
+                    data: { uuid: uuid },
                     type: "POST",
                     success: function (data, status) {
-                        console.log(data[0].pic1)
-                        console.log("complaint1" + JSON.stringify(data))
-                        $("#imageBox").html('<img src="childlab.jpeg" />');
+                        console.log(uuid)
+                        console.log(data[0].photo)
+
+
+                        $("#imageBox").html("<img style='width:498px;height:450px' src=\"" + "/" + data[0].photo + "\">");
+
 
 
                     },
@@ -508,12 +518,12 @@
 
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title">PHOTO</h4>
+                    <h4 class="modal-title">CHILD PHOTO</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
 
                 <!-- Modal body -->
-                <img src="/childlab.jpeg">;
+
                 <div id="imageBox"></div>
 
 

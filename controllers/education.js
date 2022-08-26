@@ -67,7 +67,7 @@ exports.show_education=(req,res)=>{
     var district=req.body.district
     console.log(district)
     getdb.query(
-       "SELECT * from education inner join nclb where education.comp_id=nclb.comp_id AND education.district=? ",[district],
+       "SELECT  education.comp_id,nclb.name,education.scheme,education.state,education.district,education.show_edustatus,education.description as description from education inner join nclb where education.comp_id=nclb.comp_id AND education.district=? ",[district],
        (error, results) => {
          if (error) {
            console.log(error);

@@ -2,7 +2,7 @@ const express= require("express")
 
 const db=require('./../db')
 const path = require("path");
-const dotenv = require("dotenv");
+const dotenv = require("dotenv")
 dotenv.config({ path: "./.env" });
 
 
@@ -18,12 +18,14 @@ app.use(express.urlencoded({ extended: false }));
 
 const publicDirectory2 = path.join(__dirname,'./../public')
 const publicDirectory = path.join(__dirname,'./../public/images')
+const publicDirectory3 = path.join(__dirname,'./../public/comp_image')
 const publicDirectory1 = path.join(__dirname,'./../views')
 
 
 app.use(express.static(publicDirectory))
 app.use(express.static(publicDirectory1))
 app.use(express.static(publicDirectory2))
+app.use(express.static(publicDirectory3))
 
 app.set('view engine','hbs')
 

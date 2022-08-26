@@ -214,6 +214,13 @@ router.get('/studentlogin',(req,res)=>{
     res.render('educationlogin')
    })
 
+   router.get('/donate',(req,res)=>{
+    res.render('donate')
+})
+
+router.get('/home',(req,res)=>{
+    res.render('home')
+})
 
    
 module.exports = router;
