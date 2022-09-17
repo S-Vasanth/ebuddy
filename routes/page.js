@@ -115,7 +115,7 @@ router.get('/penciladminlogin',(req,res)=>{
 
 
 
-router.get('/stud',(req,res)=>{
+router.get('/student',(req,res)=>{
     res.render('student')
 })
 

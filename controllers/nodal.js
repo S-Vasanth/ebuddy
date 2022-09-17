@@ -7,7 +7,7 @@ const getdb=db.getConnection()
 
 
 exports.nodal=(req,res)=>{
-  console.log(req.body)
+ 
 
   const {name,desc,address,city,district,pincode,state,landmark,pname,mnum,email}=req.body
  
@@ -20,6 +20,36 @@ exports.nodal=(req,res)=>{
   getdb.query(
      "INSERT INTO nodal SET ?",
      { name: name,uuid:uuid, desc: desc,photo:photo, address: address, city: city, district: district,pincode:pincode,state:state ,landmark:landmark,pname:pname,mnum:mnum,email:email},
+     (error, results) => {
+       if (error) {
+         console.log(error);
+       } else {
+         console.log(results);
+         return res.render("index", {
+           message: "complaint received",
+         });
+       }
+     }
+   );
+ 
+  
+//  res.send("form submited")
+}
+
+
+exports.location=(req,res)=>{
+ 
+console.log(req.body.district)
+  //const {name,desc,address,city,district,pincode,state,landmark,pname,mnum,email}=req.body
+ 
+
+   console.log(uuidv4())
+   var uuid=uuidv4()
+ 
+  
+  getdb.query(
+     "INSERT INTO nodal SET ?",
+     { district: req.body.district,state:req.body.state},
      (error, results) => {
        if (error) {
          console.log(error);

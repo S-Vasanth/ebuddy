@@ -50,6 +50,7 @@ router.post('/show_education',educationController.show_education)
 //const display_complaint=require('./../controllers/nodal')
 
 
+router.post('/location',nodalController.location)
 
 router.post('/nodal',nodalController.nodal)
 
