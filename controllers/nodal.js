@@ -114,9 +114,7 @@ exports.display_complaint=(req,res)=>{
        }
      }
      
-   );
-   
-   
+   );  
 }
 
 

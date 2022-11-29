@@ -1,2 +1,4 @@
 node_modules/*
+ebuddy (10).sql
+.env
 package-lock.json

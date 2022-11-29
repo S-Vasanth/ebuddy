@@ -58,7 +58,6 @@ router.post('/nodalnew',nodalController.nodalnew)
 
 router.post('/scheme_display',nodalController.scheme_display)
 
-
 router.post('/complaint',nodalController.display_complaint)
 
 router.post('/schreq',nclbController.schreq)
